@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CR Salón">
+<meta name="theme-color" content="#4A1942">
+<title>Carlos Rodríguez Salón — Caja</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234A1942'/%3E%3Ctext x='50' y='68' font-size='56' font-family='Georgia,serif' fill='%23F6EEE0' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+:root{
+  --brand:#4A1942; --brand-dark:#331230; --brand-light:#6B2A60;
+  --brand-tint:#F3E9F1;
+  --accent:#B8894A; --accent-dark:#93692F; --accent-tint:#F6EEE0;
+  --ink:#1A1720; --ink-soft:#635C6B; --ink-faint:#9A93A0;
+  --paper:#FAFAF9; --paper-dim:#F1EEF0; --card:#FFFFFF;
+  --line:#E7E2E6; --line-strong:#D8D2D9;
+  --success:#1E8A5C; --success-tint:#E4F5EC; --success-dark:#166B47;
+  --danger:#C23B4B; --danger-tint:#FBE9EB; --danger-dark:#9C2E3B;
+  --warning:#B8894A; --warning-tint:#F6EEE0;
+  --info:#2F6FB8; --info-tint:#E8F1FB;
+  --shadow-sm:0 1px 3px rgba(26,23,32,.06), 0 1px 2px rgba(26,23,32,.04);
+  --shadow:0 6px 20px rgba(26,23,32,.08);
+  --shadow-lg:0 16px 40px rgba(26,23,32,.16);
+  --radius-lg:18px; --radius:14px; --radius-sm:10px;
+  --font-display:Georgia,'Iowan Old Style','Times New Roman',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --sidebar-w:272px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;background:var(--paper);}
+body{font-family:var(--font-body);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.4;}
+button{font-family:inherit;cursor:pointer;}
+input,select,textarea{font-family:inherit;}
+a{color:inherit;}
+::selection{background:var(--accent-tint);}
+h1,h2,h3{margin:0;}
+svg{display:block;}
+
+.app-shell{min-height:100vh;background:var(--paper);}
+.main-col{min-height:100vh;padding-bottom:88px;}
+.content{padding:16px 16px 8px; max-width:1080px; margin:0 auto;}
+@media (min-width:900px){
+  .app-shell{display:flex;}
+  .main-col{flex:1;min-width:0;padding-bottom:0;}
+  .content{padding:28px 36px 56px;}
+  .bottomnav{display:none !important;}
+  .sidebar{display:flex !important;}
+}
+
+.sidebar{display:none; width:var(--sidebar-w); flex:none; flex-direction:column; background:linear-gradient(180deg,var(--brand) 0%, var(--brand-dark) 100%); color:#F3ECF2; position:sticky; top:0; height:100vh; overflow-y:auto;}
+.sb-brand{padding:26px 24px 18px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,.1);}
+.sb-brand .mark{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:20px;flex:none;border:1px solid rgba(255,255,255,.18);}
+.sb-brand .txt{min-width:0;}
+.sb-brand .txt b{display:block;font-family:var(--font-display);font-size:15.5px;line-height:1.25;font-weight:400;}
+.sb-brand .txt span{display:block;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;opacity:.6;margin-top:2px;}
+.sb-nav{flex:1; padding:14px 12px; display:flex; flex-direction:column; gap:2px;}
+.sb-nav .sb-label{font-size:10.5px;text-transform:uppercase;letter-spacing:1.2px;opacity:.5;padding:14px 12px 6px;}
+.sb-link{display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:10px; border:none; background:none; color:rgba(255,255,255,.78); font-size:13.8px; font-weight:600; text-align:left; width:100%;}
+.sb-link svg{width:19px;height:19px;flex:none;opacity:.85;}
+.sb-link:hover{background:rgba(255,255,255,.07);}
+.sb-link.active{background:rgba(255,255,255,.16); color:#fff;}
+.sb-link.active svg{opacity:1;}
+.sb-foot{padding:14px 16px 20px; border-top:1px solid rgba(255,255,255,.1);}
+.sb-user{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.sb-user .av{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none;}
+.sb-user .info{min-width:0;}
+.sb-user .info b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;}
+.sb-user .info span{font-size:10.5px;opacity:.6;text-transform:capitalize;}
+.sb-logout{width:100%;padding:9px;border-radius:9px;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;}
+.sb-logout:hover{background:rgba(255,255,255,.16);}
+.sb-logout svg{width:15px;height:15px;}
+
+.topbar{background:var(--card); border-bottom:1px solid var(--line); padding:14px 16px; position:sticky; top:0; z-index:15;}
+.topbar-row{display:flex;align-items:center;justify-content:space-between; max-width:1080px; margin:0 auto;}
+.brand{font-family:var(--font-display);font-size:18px;line-height:1.1;color:var(--ink);}
+.brand small{display:block;font-family:var(--font-body);font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-soft);margin-top:3px;font-weight:600;}
+.top-actions{display:flex;gap:8px;align-items:center;}
+.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--paper-dim);border:none;color:var(--ink);display:flex;align-items:center;justify-content:center;flex:none;}
+.icon-btn svg{width:18px;height:18px;}
+.icon-btn:active{background:var(--line);}
+.userchip{font-size:11.5px;background:var(--brand-tint);color:var(--brand);padding:5px 12px 5px 9px;border-radius:99px;display:flex;align-items:center;gap:6px;font-weight:700;}
+.userchip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+@media (min-width:900px){ .has-sidebar .topbar .brand{display:none;} .has-sidebar .topbar-row{justify-content:flex-end;} }
+
+.section-title{font-family:var(--font-display); font-size:16px; color:var(--ink); margin:24px 0 12px; display:flex; align-items:center; justify-content:space-between; gap:10px; font-weight:400;}
+.section-title .link{font-family:var(--font-body);font-size:12px;color:var(--brand);text-decoration:none;font-weight:700;display:flex;align-items:center;gap:3px;}
+.page-head{margin-bottom:4px;}
+.page-head h1{font-family:var(--font-display);font-size:22px;font-weight:400;color:var(--ink);}
+.page-head p{font-size:13px;color:var(--ink-soft);margin-top:3px;}
+.muted{color:var(--ink-soft);}
+.small{font-size:12.5px;}
+.tiny{font-size:11px;}
+.pageback{display:flex;align-items:center;gap:10px;margin-bottom:2px;}
+.pageback .icon-btn{background:none;color:var(--brand);}
+
+.receipt{background:linear-gradient(155deg,var(--brand) 0%, var(--brand-dark) 100%); color:#fff; border-radius:var(--radius-lg); padding:22px 22px 26px; position:relative; box-shadow:var(--shadow-lg); overflow:hidden;}
+.receipt::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(120deg, rgba(255,255,255,.035) 0 2px, transparent 2px 16px);pointer-events:none;}
+.receipt-eyebrow{font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.65); display:flex; justify-content:space-between; position:relative; z-index:1;}
+.receipt-balance-row{display:flex;align-items:baseline;gap:10px;position:relative;z-index:1;}
+.receipt-balance{font-family:var(--font-display); font-size:38px; margin:6px 0 2px;}
+.eye-toggle{background:rgba(255,255,255,.14);border:none;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+.eye-toggle svg{width:15px;height:15px;}
+.receipt-dash{border:none; border-top:1px dashed rgba(255,255,255,.28); margin:16px 0; position:relative; z-index:1;}
+.receipt-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; position:relative; z-index:1;}
+.receipt-grid div b{display:block; font-family:var(--font-mono); font-size:15px; margin-top:3px;}
+.receipt-grid .lbl{font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.6);}
+.receipt-closing{margin-top:16px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.28);display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1;flex-wrap:wrap;}
+.closing-badge{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;}
+.closing-badge svg{width:14px;height:14px;}
+.closing-badge.open{color:#FFD9DE;}
+.closing-badge.closed{color:#CFF3E1;}
+.receipt .mini-btn{background:rgba(255,255,255,.16);border:none;color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border-radius:9px;display:flex;align-items:center;gap:6px;}
+.receipt .mini-btn:active{background:rgba(255,255,255,.28);}
+
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow-sm); margin-bottom:14px;}
+.grid-auto{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px;}
+.grid-auto-sm{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px;}
+.kpi{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:15px; box-shadow:var(--shadow-sm);}
+.kpi .k-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.kpi .k-lbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.6px; color:var(--ink-soft); font-weight:700;}
+.kpi .k-ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none;}
+.kpi .k-ic svg{width:15px;height:15px;}
+.kpi .k-val{font-family:var(--font-mono); font-size:20px; font-weight:700;}
+.kpi .k-sub{font-size:11px;color:var(--ink-faint);margin-top:2px;}
+
+.quick-actions{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:16px 0;}
+.qa-btn{border:none; border-radius:var(--radius); padding:16px; text-align:left; color:#fff; font-weight:700; font-size:14px; display:flex; flex-direction:column; gap:10px; box-shadow:var(--shadow-sm);}
+.qa-btn.in{background:linear-gradient(135deg,var(--success) 0%,var(--success-dark) 100%);}
+.qa-btn.out{background:linear-gradient(135deg,var(--danger) 0%,var(--danger-dark) 100%);}
+.qa-btn.neutral{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);}
+.qa-btn .ic{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;}
+.qa-btn .ic svg{width:17px;height:17px;}
+
+.mv-row{display:flex; align-items:center; gap:12px; padding:12px 2px; border-bottom:1px solid var(--line);}
+.mv-row:last-child{border-bottom:none;}
+.mv-ic{width:38px;height:38px;border-radius:11px; flex:none; display:flex;align-items:center;justify-content:center;}
+.mv-ic svg{width:17px;height:17px;}
+.mv-ic.in{background:var(--success-tint); color:var(--success-dark);}
+.mv-ic.out{background:var(--danger-tint); color:var(--danger-dark);}
+.mv-body{flex:1; min-width:0;}
+.mv-title{font-size:13.8px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.mv-sub{font-size:11.5px; color:var(--ink-soft); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.mv-amt{font-family:var(--font-mono); font-weight:700; font-size:14px; white-space:nowrap; flex:none;}
+.mv-amt.in{color:var(--success-dark);}
+.mv-amt.out{color:var(--danger-dark);}
+.mv-row.tappable{cursor:pointer;}
+.mv-row.tappable:hover{background:var(--paper-dim);}
+
+.empty-state{text-align:center; padding:36px 18px; color:var(--ink-soft);}
+.empty-state .glyph{width:44px;height:44px;border-radius:50%;background:var(--paper-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.empty-state .glyph svg{width:20px;height:20px;color:var(--ink-faint);}
+.empty-state b{display:block; color:var(--ink); font-family:var(--font-display); font-size:16px; margin-bottom:4px; font-weight:400;}
+
+.rank-row{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);}
+.rank-row:last-child{border-bottom:none;}
+.rank-num{width:24px;height:24px;border-radius:50%;background:var(--accent-tint);color:var(--accent-dark);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;}
+.rank-row:nth-child(1) .rank-num{background:#FCEBC5;color:#8A6516;}
+.rank-body{flex:1;min-width:0;}
+.rank-title{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rank-sub{font-size:11px;color:var(--ink-soft);}
+.rank-val{font-family:var(--font-mono);font-weight:700;font-size:13px;flex:none;text-align:right;}
+
+.field{margin-bottom:14px;}
+.field label{display:block; font-size:11.5px; letter-spacing:.4px; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px; font-weight:700;}
+.field input[type=text],.field input[type=number],.field input[type=password],.field input[type=date],.field input[type=tel],.field input[type=email],.field select,.field textarea{
+  width:100%; padding:12px 12px; border:1.5px solid var(--line); border-radius:var(--radius-sm); background:var(--paper); font-size:15px; color:var(--ink);
+}
+.field textarea{resize:vertical; min-height:64px;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--brand); background:#fff;}
+.field .hint{font-size:11px; color:var(--ink-soft); margin-top:5px;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.field-row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+.input-affix{position:relative;}
+.input-affix.pre input{padding-left:26px;}
+.input-affix.suf input{padding-right:30px;}
+.input-affix span{position:absolute; top:50%; transform:translateY(-50%); color:var(--ink-soft); font-size:14px; font-weight:600; pointer-events:none;}
+.input-affix.pre span{left:12px;}
+.input-affix.suf span{right:12px;}
+
+.pw-wrap{position:relative;}
+.pw-wrap input{padding-right:42px;}
+.pw-toggle{position:absolute; right:4px; top:50%; transform:translateY(-50%); background:none; border:none; width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--ink-soft);}
+.pw-toggle:hover{background:var(--paper-dim); color:var(--ink);}
+.pw-toggle svg{width:17px;height:17px;}
+
+.segmented{display:flex; background:var(--paper-dim); border-radius:12px; padding:4px; gap:4px;}
+.segmented button{flex:1; border:none; background:transparent; padding:10px 8px; border-radius:9px; font-size:13.5px; font-weight:700; color:var(--ink-soft);}
+.segmented button.active{background:var(--card); color:var(--ink); box-shadow:var(--shadow-sm);}
+.segmented button.active.in{color:var(--success-dark);}
+.segmented button.active.out{color:var(--danger-dark);}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px;}
+.chip{border:1.5px solid var(--line); background:var(--card); border-radius:99px; padding:8px 14px; font-size:12.8px; font-weight:700; color:var(--ink-soft);}
+.chip.active{background:var(--brand); color:#fff; border-color:var(--brand);}
+
+.btn{border:none; border-radius:var(--radius-sm); padding:13px 18px; font-size:14.5px; font-weight:700; width:100%; display:flex; align-items:center; justify-content:center; gap:8px;}
+.btn svg{width:16px;height:16px;}
+.btn:active{transform:scale(.98);}
+.btn-primary{background:var(--brand); color:#fff;}
+.btn-primary:active{background:var(--brand-dark);}
+.btn-accent{background:var(--accent); color:#fff;}
+.btn-secondary{background:var(--paper-dim); color:var(--ink); border:1.5px solid var(--line);}
+.btn-ghost{background:transparent; color:var(--brand); padding:10px;}
+.btn-danger{background:var(--danger-tint); color:var(--danger-dark);}
+.btn-success{background:var(--success-tint); color:var(--success-dark);}
+.btn-sm{padding:9px 14px; font-size:12.5px; width:auto;}
+.btn[disabled]{opacity:.4; pointer-events:none;}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap;}
+.btn-row .btn{flex:1; min-width:120px;}
+
+.bottomnav{position:fixed; left:0; right:0; bottom:0; background:var(--card); border-top:1px solid var(--line); display:flex; padding:7px 4px calc(7px + env(safe-area-inset-bottom)); box-shadow:0 -4px 16px rgba(0,0,0,.06); z-index:20;}
+.nav-btn{flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 2px; color:var(--ink-faint); font-size:10px; font-weight:700; letter-spacing:.2px;}
+.nav-btn svg{width:20px; height:20px;}
+.nav-btn.active{color:var(--brand);}
+
+.login-wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 20px; background:radial-gradient(circle at 20% -10%, var(--brand-light) 0%, var(--brand) 45%, var(--brand-dark) 100%);}
+.login-box{width:100%; max-width:380px;}
+.login-mark{text-align:center; margin-bottom:28px; color:#fff;}
+.login-mark .badge{width:60px;height:60px;border-radius:16px; margin:0 auto 14px; background:rgba(255,255,255,.12); display:flex;align-items:center;justify-content:center; font-family:var(--font-display); font-size:26px; border:1px solid rgba(255,255,255,.22);}
+.login-mark h1{font-family:var(--font-display); font-size:23px; margin:0; font-weight:400;}
+.login-mark p{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase; opacity:.62; margin-top:6px;}
+.login-card{background:var(--paper); border-radius:var(--radius-lg); padding:24px 22px; color:var(--ink); box-shadow:var(--shadow-lg);}
+.login-card .field input{background:#fff;}
+.login-err{background:var(--danger-tint); color:var(--danger-dark); font-size:12.5px; padding:10px 12px; border-radius:var(--radius-sm); margin-bottom:14px; display:flex; gap:8px; align-items:flex-start;}
+.login-hint{text-align:center; margin-top:18px; font-size:11px; color:rgba(255,255,255,.55);}
+
+.lock-wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 20px; background:linear-gradient(160deg,var(--brand-dark),var(--ink));}
+.lock-card{width:100%;max-width:340px;background:var(--paper);border-radius:var(--radius-lg);padding:28px 22px;text-align:center;box-shadow:var(--shadow-lg);}
+.lock-ic{width:56px;height:56px;border-radius:50%;background:var(--brand-tint);color:var(--brand);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.lock-ic svg{width:26px;height:26px;}
+
+.overlay{position:fixed; inset:0; background:rgba(26,23,32,.55); z-index:50; display:flex; align-items:flex-end; justify-content:center;}
+.sheet{background:var(--paper); width:100%; max-width:520px; border-radius:20px 20px 0 0; max-height:90vh; overflow-y:auto; padding:6px 20px 28px; animation:sheetup .18s ease-out;}
+@keyframes sheetup{from{transform:translateY(24px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@media (min-width:640px){ .overlay{align-items:center;} .sheet{border-radius:var(--radius-lg); max-height:86vh;} }
+.sheet-handle{width:38px; height:4px; background:var(--line-strong); border-radius:99px; margin:10px auto 14px;}
+@media (min-width:640px){ .sheet-handle{display:none;} }
+.sheet-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+.sheet-head h3{font-family:var(--font-display); font-weight:400; font-size:19px; margin:0;}
+.sheet-close{background:var(--paper-dim); border:none; width:32px;height:32px; border-radius:50%; color:var(--ink-soft); display:flex; align-items:center; justify-content:center;}
+.sheet-close svg{width:15px;height:15px;}
+
+.tabs{display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:6px;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{border:none; background:var(--paper-dim); color:var(--ink-soft); padding:9px 15px; border-radius:99px; font-size:12.5px; font-weight:700; white-space:nowrap;}
+.tab-btn.active{background:var(--brand); color:#fff;}
+
+.menu-item{display:flex; align-items:center; gap:12px; padding:14px 4px; border-bottom:1px solid var(--line); background:none; border-left:none; border-right:none; border-top:none; width:100%; text-align:left;}
+.menu-item:last-child{border-bottom:none;}
+.menu-item:hover{background:var(--paper-dim);}
+.menu-item .mi-ic{width:36px;height:36px;border-radius:10px; background:var(--paper-dim); display:flex;align-items:center;justify-content:center; flex:none;}
+.menu-item .mi-ic svg{width:16px;height:16px;color:var(--brand);}
+.menu-item .mi-txt{flex:1; min-width:0;}
+.menu-item .mi-title{font-size:13.8px; font-weight:700;}
+.menu-item .mi-sub{font-size:11.5px; color:var(--ink-soft); margin-top:1px;}
+.menu-item .chev{color:var(--ink-faint); flex:none;}
+.menu-item .chev svg{width:15px;height:15px;}
+
+.badge-pill{font-size:10px; font-weight:800; padding:3px 9px; border-radius:99px; letter-spacing:.3px; display:inline-flex; align-items:center; gap:4px;}
+.badge-pill.on{background:var(--success-tint); color:var(--success-dark);}
+.badge-pill.off{background:var(--danger-tint); color:var(--danger-dark);}
+.badge-pill.role{background:var(--accent-tint); color:var(--accent-dark);}
+.badge-pill.info{background:var(--info-tint); color:var(--info);}
+
+.banner{display:flex;align-items:flex-start;gap:10px;padding:13px 14px;border-radius:var(--radius-sm);font-size:12.8px;margin-bottom:14px;}
+.banner svg{width:17px;height:17px;flex:none;margin-top:1px;}
+.banner.warn{background:var(--warning-tint); color:var(--accent-dark);}
+.banner.info{background:var(--info-tint); color:var(--info);}
+.banner.success{background:var(--success-tint); color:var(--success-dark);}
+.banner.danger{background:var(--danger-tint); color:var(--danger-dark);}
+
+#toast-host{position:fixed; left:50%; transform:translateX(-50%); bottom:96px; z-index:100; display:flex; flex-direction:column; gap:8px; align-items:center; width:100%; max-width:440px; padding:0 20px;}
+@media (min-width:900px){ #toast-host{bottom:24px;} }
+.toast{background:var(--ink); color:#fff; padding:11px 16px; border-radius:10px; font-size:13px; box-shadow:var(--shadow-lg); animation:toastin .15s ease-out; max-width:100%; display:flex; align-items:center; gap:8px;}
+@keyframes toastin{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+.barlist .barrow{margin-bottom:11px;}
+.barlist .barrow .bl-top{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:4px;}
+.barlist .bartrack{height:8px; border-radius:99px; background:var(--paper-dim); overflow:hidden;}
+.barlist .barfill{height:100%; border-radius:99px;}
+.stockbar{height:5px; border-radius:99px; background:var(--paper-dim); margin-top:6px; overflow:hidden;}
+.stockbar > div{height:100%; border-radius:99px;}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.divider-label{font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--ink-soft); margin:18px 0 8px; font-weight:800;}
+.switch-row{display:flex;align-items:center;justify-content:space-between;padding:12px 2px;border-bottom:1px solid var(--line);gap:12px;}
+.switch-row:last-child{border-bottom:none;}
+.switch{position:relative; width:44px; height:26px; flex:none;}
+.switch input{opacity:0; width:100%; height:100%; margin:0; position:absolute; cursor:pointer; z-index:1;}
+.switch .track{position:absolute; inset:0; background:var(--line-strong); border-radius:99px; transition:.15s;}
+.switch .thumb{position:absolute; top:3px; left:3px; width:20px; height:20px; background:#fff; border-radius:50%; box-shadow:var(--shadow-sm); transition:.15s;}
+.switch input:checked ~ .track{background:var(--brand);}
+.switch input:checked ~ .thumb{transform:translateX(18px);}
+
+/* La exportación a PDF ahora abre una ventana/documento independiente (ver exportPdf),
+   por lo que ya no depende de trucos de visibilidad sobre esta misma página. */
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast-host"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* =====================================================================
+   CONSTANTES
+===================================================================== */
+const DB_NAME='SalonCRDB', DB_VERSION=3;
+const SALT='crs_salon_2026_v2';
+const PAY_METHODS=['Efectivo','Tarjeta','Transferencia'];
+const LOW_STOCK=3;
+const DEFAULT_SALON_NAME='Carlos Rodríguez Salón';
+const DEFAULT_LOCK_MIN=10;
+const STORES=['users','employees','services','products','expenseCategories','movements','cashClosings','cashOpenings','meta'];
+
+/* =====================================================================
+   INDEXEDDB HELPERS
+===================================================================== */
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded=(e)=>{
+      const db=e.target.result;
+      STORES.forEach(name=>{
+        if(!db.objectStoreNames.contains(name)){
+          db.createObjectStore(name, name==='meta' ? {keyPath:'key'} : {keyPath:'id', autoIncrement:true});
+        }
+      });
+    };
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+function store(db,name,mode){ return db.transaction(name,mode||'readonly').objectStore(name); }
+function idbGetAll(db,name){ return new Promise((res,rej)=>{const r=store(db,name).getAll(); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);}); }
+function idbAdd(db,name,obj){ return new Promise((res,rej)=>{const r=store(db,name,'readwrite').add(obj); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);}); }
+function idbPut(db,name,obj){ return new Promise((res,rej)=>{const r=store(db,name,'readwrite').put(obj); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);}); }
+function idbDel(db,name,id){ return new Promise((res,rej)=>{const r=store(db,name,'readwrite').delete(id); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error);}); }
+function idbGet(db,name,id){ return new Promise((res,rej)=>{const r=store(db,name).get(id); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);}); }
+
+/* =====================================================================
+   ESTADO GLOBAL
+===================================================================== */
+let S = {
+  db:null, user:null, view:'dashboard', catTab:'servicios', locked:false,
+  employees:[], services:[], products:[], categories:[], movements:[], users:[], closings:[], openings:[],
+  meta:{ salonName:DEFAULT_SALON_NAME, backupEmail:'', lockMinutes:DEFAULT_LOCK_MIN, showAmounts:true, logoDataUrl:'' },
+  mvType:'ingreso', mvSubtype:'servicio', editingMovement:null,
+  histFilter:{range:'mes', type:'todos', q:''}, repRange:'mes', repFrom:null, repTo:null, topPeriod:'mes',
+};
+let lastActivity=Date.now();
+let lockTimer=null;
+
+/* =====================================================================
+   UTILIDADES
+===================================================================== */
+const $=(sel,root)=>(root||document).querySelector(sel);
+const $$=(sel,root)=>[...(root||document).querySelectorAll(sel)];
+function fmt(n){ return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0); }
+function fmtMasked(n){ return S.meta.showAmounts===false ? '••••' : fmt(n); }
+function todayISO(){ return toISO(new Date()); }
+function toISO(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function fmtDateLong(iso){ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString('es-SV',{weekday:'long', day:'numeric', month:'long'}); }
+function fmtDateShort(iso){ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString('es-SV',{day:'2-digit', month:'short'}); }
+function fmtDateTime(iso){ const d=new Date(iso); return d.toLocaleDateString('es-SV',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('es-SV',{hour:'2-digit',minute:'2-digit'}); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+async function hashPw(pw){
+  try{
+    if(window.crypto && window.crypto.subtle){
+      const enc=new TextEncoder().encode(pw+SALT);
+      const buf=await crypto.subtle.digest('SHA-256',enc);
+      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+  }catch(e){}
+  let h=0; const s=pw+SALT;
+  for(let i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; }
+  return 'fb'+Math.abs(h).toString(16);
+}
+function toast(msg,type){
+  const host=$('#toast-host');
+  const t=document.createElement('div');
+  t.className='toast';
+  if(type==='error'){ t.style.background='#9C2E3B'; }
+  if(type==='success'){ t.style.background='#166B47'; }
+  t.textContent=msg;
+  host.appendChild(t);
+  setTimeout(()=>{ t.style.transition='opacity .25s'; t.style.opacity='0'; setTimeout(()=>t.remove(),260); }, 2400);
+}
+
+/* localStorage puede estar bloqueado si el archivo se abre como file:// dentro de un
+   visor "en línea" (WhatsApp, gestor de archivos). No debe romper la app: usamos un
+   respaldo en memoria. IndexedDB (los datos reales) no se ve afectado por esto. */
+const memoryStorage={};
+const safeStorage={
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){ memoryStorage[k]=v; } },
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return memoryStorage[k]!==undefined?memoryStorage[k]:null; } },
+  remove(k){ try{ localStorage.removeItem(k); }catch(e){ delete memoryStorage[k]; } },
+};
+
+/* ---------- Máscaras de entrada ---------- */
+function maskPhone(el){
+  el.addEventListener('input',()=>{
+    let v=el.value.replace(/\D/g,'').slice(0,8);
+    if(v.length>4) v=v.slice(0,4)+'-'+v.slice(4);
+    el.value=v;
+  });
+}
+function maskUsername(el){
+  el.addEventListener('input',()=>{ el.value=el.value.toLowerCase().replace(/\s+/g,''); });
+}
+
+/* ---------- Iconos (set propio, trazo consistente) ---------- */
+function icon(name){
+  const M={
+    home:'<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V19a1 1 0 0 0 1 1H10v-5.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1V20h3.5a1 1 0 0 0 1-1V9.5"/>',
+    plus:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
+    plusSimple:'<path d="M12 5v14M5 12h14"/>',
+    list:'<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.3"/><circle cx="4.5" cy="12" r="1.3"/><circle cx="4.5" cy="18" r="1.3"/>',
+    chart:'<path d="M4 20V11M11 20V4M18 20v-8"/><path d="M2.5 20h19"/>',
+    more:'<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
+    logout:'<path d="M9.5 4H5.5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9.5"/>',
+    scissors:'<circle cx="6.5" cy="6.5" r="2.3"/><circle cx="6.5" cy="17.5" r="2.3"/><path d="M20 5 8 19M8 5l3.5 3.9M20 19l-4.8-5.4"/>',
+    bottle:'<path d="M9.5 2.5h5v3.3c1.4.7 2.3 2 2.3 3.6V19a2 2 0 0 1-2 2h-5.6a2 2 0 0 1-2-2V9.4c0-1.6.9-2.9 2.3-3.6V2.5z"/><path d="M8.7 11h6.6"/>',
+    users:'<circle cx="9" cy="8" r="3.2"/><path d="M2.8 20c0-3.4 2.8-6.2 6.2-6.2s6.2 2.8 6.2 6.2"/><circle cx="17.3" cy="9.3" r="2.4"/><path d="M15.5 14a5.2 5.2 0 0 1 5.7 5.8"/>',
+    tag:'<path d="M20 12.3 12 4.3 4.3 5l-.7 7.7 8 8 8.4-8.4z"/><circle cx="9" cy="9" r="1.4"/>',
+    save:'<path d="M5 4.5h11l3.5 3.5V19a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/><path d="M8 4.5V10h8V4.5"/><path d="M8 14h8v6H8z"/>',
+    print:'<path d="M6.5 9V4h11v5"/><path d="M6 18H4.5a1 1 0 0 1-1-1v-6.5a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H18"/><path d="M6.5 14h11v6.5h-11z"/>',
+    excel:'<rect x="4" y="3.5" width="16" height="17" rx="1.6"/><path d="M8.3 9l7.4 6M15.7 9l-7.4 6"/>',
+    key:'<circle cx="8.2" cy="15.5" r="4"/><path d="M11 12.6 19.5 4"/><path d="M15.7 7.2l2.8 2.8"/><path d="M13 10l2.3 2.3"/>',
+    back:'<path d="M15 5 8 12l7 7"/>',
+    edit:'<path d="M4 20h4L18.4 9.6a2.1 2.1 0 0 0-3-3L5 17v3z"/>',
+    trash:'<path d="M4.5 7h15"/><path d="M9.5 7V4.3h5V7"/><path d="M6.5 7 7.4 20h9.2L17.5 7"/>',
+    check:'<path d="M4.5 12.5 9.5 17.5 19.5 6"/>',
+    alert:'<path d="M12 3.5 2.5 20h19z"/><path d="M12 9.5v4.5"/><circle cx="12" cy="17" r="1"/>',
+    arrow:'<path d="M9 5l7 7-7 7"/>',
+    dl:'<path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/>',
+    ul:'<path d="M12 21V9"/><path d="M7 14l5-5 5 5"/><path d="M5 20h14"/>',
+    lock:'<rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+    unlock:'<rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8 10.5V7.5a4 4 0 0 1 7.4-2"/>',
+    mail:'<rect x="3.5" y="5.5" width="17" height="13" rx="1.8"/><path d="M4.5 7l7.5 6 7.5-6"/>',
+    shield:'<path d="M12 3.5 19.5 6.5V12c0 5-3.2 7.7-7.5 8.5C7.7 19.7 4.5 17 4.5 12V6.5z"/><path d="M9 12l2 2 4-4.3"/>',
+    eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>',
+    eyeoff:'<path d="M3.5 3.5l17 17"/><path d="M10.6 5.7A10.6 10.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a15.7 15.7 0 0 1-3.3 4.1M7 6.9C4.6 8.4 2.5 12 2.5 12s3.5 6.5 9.5 6.5c1.3 0 2.5-.3 3.6-.8"/><path d="M9.5 13a2.5 2.5 0 0 0 3.6 2.6M14.3 10.4A2.5 2.5 0 0 0 10.4 9"/>',
+    star:'<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8z"/>',
+    cash:'<rect x="2.5" y="6" width="19" height="12.5" rx="1.8"/><circle cx="12" cy="12.3" r="3"/><path d="M5.5 9v0M18.5 15.6v0"/>',
+    drawer:'<rect x="3.5" y="5" width="17" height="14" rx="1.6"/><path d="M3.5 12h17"/><path d="M10 15.3h4"/>',
+    settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1h-.2a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.5 7.5a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.6v-.2a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.2a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z"/>',
+    building:'<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h1.2M13.8 7H15M9 11h1.2M13.8 11H15M9 15h1.2M13.8 15H15"/><path d="M10 21v-4h4v4"/>',
+    warn:'<path d="M12 3.5 2.5 20h19z"/><path d="M12 9.5v4.5"/><circle cx="12" cy="17" r="1"/>',
+    trend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/>',
+    calendar:'<rect x="3.5" y="5" width="17" height="15.5" rx="1.8"/><path d="M3.5 9.5h17"/><path d="M8 3v4M16 3v4"/>',
+    search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/>',
+    x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  };
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(M[name]||'')+'</svg>';
+}
+
+/* =====================================================================
+   CARGA / SEED
+===================================================================== */
+async function loadAll(){
+  S.employees = await idbGetAll(S.db,'employees');
+  S.services = await idbGetAll(S.db,'services');
+  S.products = await idbGetAll(S.db,'products');
+  S.categories = await idbGetAll(S.db,'expenseCategories');
+  S.movements = (await idbGetAll(S.db,'movements')).sort((a,b)=> (b.date+b.createdAt).localeCompare(a.date+a.createdAt));
+  S.users = await idbGetAll(S.db,'users');
+  S.closings = (await idbGetAll(S.db,'cashClosings')).sort((a,b)=> b.date.localeCompare(a.date));
+  S.openings = (await idbGetAll(S.db,'cashOpenings')).sort((a,b)=> b.date.localeCompare(a.date));
+  const metaRows = await idbGetAll(S.db,'meta');
+  const metaMap={ salonName:DEFAULT_SALON_NAME, backupEmail:'', lockMinutes:DEFAULT_LOCK_MIN, showAmounts:true, logoDataUrl:'' };
+  metaRows.forEach(r=>{ metaMap[r.key]=r.value; });
+  S.meta = metaMap;
+}
+async function setMeta(key,value){
+  await idbPut(S.db,'meta',{key,value});
+  S.meta[key]=value;
+}
+
+async function seedIfNeeded(){
+  const rows = await idbGetAll(S.db,'meta');
+  const seeded = rows.find(r=>r.key==='seeded');
+  if(seeded && seeded.value) return;
+
+  await idbAdd(S.db,'users',{username:'admin', name:'Carlos Rodríguez', role:'admin', active:true, passwordHash: await hashPw('admin123')});
+  await idbAdd(S.db,'users',{username:'empleado', name:'Empleado Demo', role:'empleado', active:true, passwordHash: await hashPw('empleado123')});
+
+  const emp=[
+    {name:'María López', phone:'7123-4567', defaultCommission:10, active:true},
+    {name:'Ana Martínez', phone:'7234-5678', defaultCommission:10, active:true},
+    {name:'Jonathan Pérez', phone:'7345-6789', defaultCommission:8, active:true},
+  ];
+  for(const e of emp) await idbAdd(S.db,'employees',e);
+
+  const svcs=[
+    {name:'Corte dama', price:12, commission:10, active:true},
+    {name:'Corte caballero', price:7, commission:10, active:true},
+    {name:'Tinte / Color', price:35, commission:15, active:true},
+    {name:'Manicure', price:10, commission:10, active:true},
+    {name:'Pedicure', price:12, commission:10, active:true},
+    {name:'Peinado / Evento', price:25, commission:12, active:true},
+    {name:'Tratamiento capilar', price:20, commission:12, active:true},
+    {name:'Alisado / Keratina', price:45, commission:15, active:true},
+    {name:'Maquillaje', price:30, commission:15, active:true},
+    {name:'Depilación de cejas', price:5, commission:8, active:true},
+  ];
+  for(const s of svcs) await idbAdd(S.db,'services',s);
+
+  const prods=[
+    {name:'Shampoo profesional 250ml', price:8, commission:5, stock:15, active:true},
+    {name:'Acondicionador 250ml', price:8, commission:5, stock:15, active:true},
+    {name:'Serum capilar', price:12, commission:5, stock:10, active:true},
+    {name:'Crema para peinar', price:9, commission:5, stock:10, active:true},
+    {name:'Esmalte de uñas', price:4, commission:5, stock:20, active:true},
+    {name:'Kit de brochas de maquillaje', price:18, commission:5, stock:5, active:true},
+  ];
+  for(const p of prods) await idbAdd(S.db,'products',p);
+
+  await idbPut(S.db,'meta',{key:'seeded', value:true});
+  await idbPut(S.db,'meta',{key:'salonName', value:DEFAULT_SALON_NAME});
+  await idbPut(S.db,'meta',{key:'backupEmail', value:''});
+  await idbPut(S.db,'meta',{key:'lockMinutes', value:DEFAULT_LOCK_MIN});
+  await idbPut(S.db,'meta',{key:'showAmounts', value:true});
+}
+
+/* =====================================================================
+   AUTENTICACIÓN Y BLOQUEO
+===================================================================== */
+async function login(username, password){
+  const u = S.users.find(x=> x.username.toLowerCase() === username.trim().toLowerCase());
+  if(!u || !u.active) return {ok:false, msg:'Usuario no encontrado o inactivo.'};
+  const h = await hashPw(password);
+  if(h !== u.passwordHash) return {ok:false, msg:'Contraseña incorrecta.'};
+  S.user = {id:u.id, username:u.username, name:u.name, role:u.role};
+  safeStorage.set('scr_session', String(u.id));
+  S.view = u.role==='admin' ? 'dashboard' : 'nuevo';
+  S.locked=false;
+  touchActivity();
+  return {ok:true};
+}
+function logout(){
+  safeStorage.remove('scr_session');
+  S.user=null; S.view='dashboard'; S.locked=false;
+  render();
+}
+async function restoreSession(){
+  const id = safeStorage.get('scr_session');
+  if(!id) return;
+  const u = S.users.find(x=>x.id===Number(id));
+  if(u && u.active){
+    S.user={id:u.id, username:u.username, name:u.name, role:u.role};
+    S.view = u.role==='admin' ? 'dashboard' : 'nuevo';
+  } else {
+    safeStorage.remove('scr_session');
+  }
+}
+function touchActivity(){ lastActivity=Date.now(); }
+function setupInactivityLock(){
+  ['click','keydown','touchstart','mousemove','scroll'].forEach(ev=>{
+    document.addEventListener(ev, ()=>{ if(S.user && !S.locked) touchActivity(); }, {passive:true});
+  });
+  if(lockTimer) clearInterval(lockTimer);
+  lockTimer=setInterval(()=>{
+    if(!S.user || S.locked) return;
+    const mins = Number(S.meta.lockMinutes)||0;
+    if(mins<=0) return;
+    if(Date.now()-lastActivity >= mins*60*1000){
+      S.locked=true;
+      render();
+    }
+  }, 15000);
+}
+async function unlock(password){
+  const u = S.users.find(x=>x.id===S.user.id);
+  const h = await hashPw(password);
+  if(h!==u.passwordHash) return false;
+  S.locked=false; touchActivity(); render();
+  return true;
+}
+
+/* =====================================================================
+   CÁLCULOS
+===================================================================== */
+function inRange(dateISO, from, to){ return dateISO>=from && dateISO<=to; }
+function rangeFor(key, customFrom, customTo){
+  const t=todayISO();
+  if(key==='hoy') return {from:t, to:t};
+  if(key==='semana'){
+    const d=new Date(t+'T00:00:00');
+    const day=(d.getDay()+6)%7;
+    const mon=new Date(d); mon.setDate(d.getDate()-day);
+    return {from: toISO(mon), to:t};
+  }
+  if(key==='mes') return {from: t.slice(0,8)+'01', to:t};
+  return {from: customFrom||t, to: customTo||t};
+}
+function movementsInRange(from,to){ return S.movements.filter(m=> inRange(m.date, from, to)); }
+function totals(list){
+  let ingresos=0, egresos=0, comisiones=0, ingServicios=0, ingProductos=0, ingOtros=0;
+  const egresosPorCat={};
+  list.forEach(m=>{
+    if(m.type==='ingreso'){
+      ingresos+=m.amount;
+      comisiones+= m.commissionAmount||0;
+      if(m.itemType==='servicio') ingServicios+=m.amount;
+      else if(m.itemType==='producto') ingProductos+=m.amount;
+      else ingOtros+=m.amount;
+    } else {
+      egresos+=m.amount;
+      const c=m.category||'Sin categoría';
+      egresosPorCat[c]=(egresosPorCat[c]||0)+m.amount;
+    }
+  });
+  return {ingresos, egresos, comisiones, ingServicios, ingProductos, ingOtros, egresosPorCat, balance: ingresos-egresos};
+}
+function cashByMethod(list){
+  const map={};
+  PAY_METHODS.forEach(pm=> map[pm]={in:0,out:0});
+  list.forEach(m=>{
+    const pm = m.paymentMethod || 'Efectivo';
+    if(!map[pm]) map[pm]={in:0,out:0};
+    if(m.type==='ingreso') map[pm].in+=m.amount; else map[pm].out+=m.amount;
+  });
+  return map;
+}
+function topItems(list, itemType, limit){
+  const agg={};
+  list.forEach(m=>{
+    if(m.type==='ingreso' && m.itemType===itemType && m.itemId){
+      const key=m.itemId;
+      if(!agg[key]) agg[key]={id:key, name:m.concept, count:0, amount:0};
+      agg[key].count += (m.qty||1);
+      agg[key].amount += m.amount;
+      agg[key].name = m.concept || agg[key].name;
+    }
+  });
+  return Object.values(agg).sort((a,b)=>b.amount-a.amount).slice(0, limit||5);
+}
+
+/* =====================================================================
+   RENDER RAÍZ
+===================================================================== */
+function render(){
+  const app=$('#app');
+  if(!S.user){ app.innerHTML = renderLogin(); bindGlobalEvents(); return; }
+  if(S.locked){ app.innerHTML = renderLockScreen(); bindGlobalEvents(); return; }
+  app.innerHTML = renderShell();
+  bindGlobalEvents();
+}
+
+function renderLogin(){
+  return `
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="login-mark">
+        <div class="badge">${S.meta.logoDataUrl? `<img src="${S.meta.logoDataUrl}" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">` : 'C'}</div>
+        <h1>${esc(S.meta.salonName||DEFAULT_SALON_NAME)}</h1>
+        <p>Control de caja diaria</p>
+      </div>
+      <div class="login-card">
+        <form id="loginForm">
+          <div id="loginErr"></div>
+          <div class="field">
+            <label>Usuario</label>
+            <input type="text" name="username" placeholder="Ej. admin" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label>Contraseña</label>
+            <div class="pw-wrap"><input type="password" name="password" placeholder="Tu contraseña" autocomplete="current-password" required><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div>
+          </div>
+          <button class="btn btn-primary" type="submit">${icon('unlock')} Entrar</button>
+        </form>
+      </div>
+      <div class="login-hint">Usuario demo: admin / admin123 · empleado / empleado123<br>Cámbialos desde Ajustes → Usuarios.</div>
+    </div>
+  </div>`;
+}
+
+function renderLockScreen(){
+  return `
+  <div class="lock-wrap">
+    <div class="lock-card">
+      <div class="lock-ic">${icon('lock')}</div>
+      <h3 style="font-family:var(--font-display);font-weight:400;font-size:19px;margin-bottom:4px;">Sesión bloqueada</h3>
+      <div class="small muted" style="margin-bottom:18px;">Por inactividad. Ingresa tu contraseña para continuar, ${esc(S.user.name.split(' ')[0])}.</div>
+      <form id="unlockForm">
+        <div id="unlockErr"></div>
+        <div class="field"><div class="pw-wrap"><input type="password" name="password" placeholder="Tu contraseña" autofocus required><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div></div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" id="lockLogout">Cerrar sesión</button>
+          <button type="submit" class="btn btn-primary">Desbloquear</button>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function renderShell(){
+  const isAdmin=S.user.role==='admin';
+  return `
+  <div class="app-shell has-sidebar">
+    ${isAdmin? renderSidebar() : ''}
+    <div class="main-col">
+      ${renderTopbar()}
+      <div class="content">${viewContent()}</div>
+    </div>
+    ${renderBottomNav()}
+  </div>`;
+}
+
+function renderTopbar(){
+  const isAdmin = S.user.role==='admin';
+  return `
+  <div class="topbar">
+    <div class="topbar-row">
+      <div class="brand" style="display:flex;align-items:center;gap:9px;">${S.meta.logoDataUrl? `<img src="${S.meta.logoDataUrl}" alt="Logo" style="width:28px;height:28px;border-radius:8px;object-fit:cover;flex:none;">`:''}<span>${esc(S.meta.salonName||DEFAULT_SALON_NAME)}<small>${isAdmin?'Panel administrador':'Registro de caja'}</small></span></div>
+      <div class="top-actions">
+        <div class="userchip"><span class="dot"></span>${esc(S.user.name.split(' ')[0])}</div>
+        <button class="icon-btn" data-action="lock" title="Bloquear sesión">${icon('lock')}</button>
+        <button class="icon-btn" data-action="logout" title="Cerrar sesión">${icon('logout')}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+const ADMIN_NAV=[
+  {v:'dashboard', ic:'home', lb:'Inicio'},
+  {v:'nuevo', ic:'plusSimple', lb:'Nuevo'},
+  {v:'historial', ic:'list', lb:'Historial'},
+  {v:'reportes', ic:'chart', lb:'Reportes'},
+  {v:'mas', ic:'more', lb:'Más'},
+];
+const SIDEBAR_NAV=[
+  {group:'Operación', items:[
+    {v:'dashboard', ic:'home', lb:'Inicio'},
+    {v:'nuevo', ic:'plusSimple', lb:'Nuevo movimiento'},
+    {v:'historial', ic:'list', lb:'Historial'},
+    {v:'cierre', ic:'drawer', lb:'Caja diaria'},
+  ]},
+  {group:'Análisis', items:[
+    {v:'reportes', ic:'chart', lb:'Reportes'},
+  ]},
+  {group:'Administración', items:[
+    {v:'catalogo', ic:'scissors', lb:'Catálogo'},
+    {v:'usuarios', ic:'users', lb:'Usuarios'},
+    {v:'respaldo', ic:'save', lb:'Respaldo'},
+    {v:'ajustes', ic:'settings', lb:'Ajustes'},
+  ]},
+];
+
+function renderSidebar(){
+  return `
+  <div class="sidebar">
+    <div class="sb-brand">
+      <div class="mark">${S.meta.logoDataUrl? `<img src="${S.meta.logoDataUrl}" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : 'C'}</div>
+      <div class="txt"><b>${esc(S.meta.salonName||DEFAULT_SALON_NAME)}</b><span>Panel administrador</span></div>
+    </div>
+    <nav class="sb-nav">
+      ${SIDEBAR_NAV.map(g=>`
+        <div class="sb-label">${g.group}</div>
+        ${g.items.map(it=>`<button class="sb-link ${S.view===it.v?'active':''}" data-nav="${it.v}">${icon(it.ic)}<span>${it.lb}</span></button>`).join('')}
+      `).join('')}
+    </nav>
+    <div class="sb-foot">
+      <div class="sb-user">
+        <div class="av">${esc(S.user.name.charAt(0))}</div>
+        <div class="info"><b>${esc(S.user.name)}</b><span>${S.user.role}</span></div>
+      </div>
+      <button class="sb-logout" data-action="logout">${icon('logout')} Cerrar sesión</button>
+    </div>
+  </div>`;
+}
+
+function renderBottomNav(){
+  const isAdmin=S.user.role==='admin';
+  const items = isAdmin ? ADMIN_NAV : [
+    {v:'nuevo', ic:'plusSimple', lb:'Nuevo'},
+    {v:'hoy', ic:'list', lb:'Hoy'},
+  ];
+  return `<div class="bottomnav">
+    ${items.map(it=>`<button class="nav-btn ${S.view===it.v?'active':''}" data-nav="${it.v}">${icon(it.ic)}<span>${it.lb}</span></button>`).join('')}
+  </div>`;
+}
+
+function viewContent(){
+  if(S.user.role==='empleado'){
+    if(S.view==='hoy') return renderEmployeeToday();
+    return renderMovementForm(true);
+  }
+  switch(S.view){
+    case 'dashboard': return renderDashboard();
+    case 'nuevo': return renderMovementForm(false);
+    case 'historial': return renderHistorial();
+    case 'reportes': return renderReportes();
+    case 'cierre': return renderCierre();
+    case 'mas': return renderMas();
+    case 'catalogo': return renderCatalogo();
+    case 'usuarios': return renderUsuarios();
+    case 'respaldo': return renderRespaldo();
+    case 'ajustes': return renderAjustes();
+    default: return renderDashboard();
+  }
+}
+
+/* =====================================================================
+   DASHBOARD
+===================================================================== */
+function isClosed(dateISO){ return S.closings.some(c=>c.date===dateISO); }
+function isOpened(dateISO){ return S.openings.some(o=>o.date===dateISO); }
+function getOpening(dateISO){ return S.openings.find(o=>o.date===dateISO); }
+function expectedCashFor(dateISO){
+  const opening = getOpening(dateISO);
+  const openingAmt = opening? opening.openingCash : 0;
+  const dayMovs = movementsInRange(dateISO,dateISO);
+  const cash = cashByMethod(dayMovs);
+  return openingAmt + cash['Efectivo'].in - cash['Efectivo'].out;
+}
+
+function renderDashboard(){
+  const t=todayISO();
+  const todays = movementsInRange(t,t);
+  const tt = totals(todays);
+  const last7 = [];
+  for(let i=6;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const iso=toISO(d);
+    const day = totals(movementsInRange(iso,iso));
+    last7.push({iso, in:day.ingresos, out:day.egresos});
+  }
+  const maxv = Math.max(1, ...last7.map(d=>Math.max(d.in,d.out)));
+  const lowStock = S.products.filter(p=>p.active!==false && p.stock<=LOW_STOCK);
+  const recent = S.movements.slice(0,5);
+  const closed = isClosed(t);
+  const opened = isOpened(t);
+
+  const {from:mFrom,to:mTo} = rangeFor('mes');
+  const monthList = movementsInRange(mFrom,mTo);
+  const topSvc = topItems(monthList,'servicio',5);
+  const topProd = topItems(monthList,'producto',5);
+  const maxSvc = Math.max(1,...topSvc.map(x=>x.amount));
+  const maxProd = Math.max(1,...topProd.map(x=>x.amount));
+
+  return `
+  <div class="page-head"><h1>Hola, ${esc(S.user.name.split(' ')[0])}</h1><p>${fmtDateLong(t)}</p></div>
+
+  ${!opened? `<div class="banner warn">${icon('warn')} Aún no registras la apertura de caja de hoy. Hazlo antes de empezar a vender para que el cierre cuadre correctamente. <a class="link" data-nav="cierre" href="#" style="margin-left:4px;">Abrir caja →</a></div>` : ''}
+
+  <div class="receipt">
+    <div class="receipt-eyebrow"><span>Balance de hoy</span><span>${fmtDateShort(t)}</span></div>
+    <div class="receipt-balance-row">
+      <div class="receipt-balance">${fmtMasked(tt.balance)}</div>
+      <button class="eye-toggle" id="toggleAmounts" title="Mostrar u ocultar montos">${icon(S.meta.showAmounts===false?'eye':'eyeoff')}</button>
+    </div>
+    <hr class="receipt-dash">
+    <div class="receipt-grid">
+      <div><b>${fmtMasked(tt.ingresos)}</b><div class="lbl">Ingresos</div></div>
+      <div><b>${fmtMasked(tt.egresos)}</b><div class="lbl">Egresos</div></div>
+      <div><b>${fmtMasked(tt.comisiones)}</b><div class="lbl">Comisiones</div></div>
+    </div>
+    <div class="receipt-closing">
+      <div class="closing-badge ${opened?'closed':'open'}">${icon(opened?'check':'alert')} ${opened?'Apertura realizada':'Apertura pendiente'}</div>
+      <button class="mini-btn" data-nav="cierre">${icon('drawer')} ${opened?'Ver':'Abrir'} caja</button>
+    </div>
+    <div class="receipt-closing" style="margin-top:8px;padding-top:0;border-top:none;">
+      <div class="closing-badge ${closed?'closed':'open'}">${icon(closed?'check':'alert')} ${closed?'Cierre de caja realizado':'Cierre de caja pendiente'}</div>
+      <button class="mini-btn" data-nav="cierre">${icon('drawer')} ${closed?'Ver':'Realizar'} cierre</button>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <button class="qa-btn in" data-quick="ingreso"><span class="ic">${icon('plusSimple')}</span>Registrar ingreso</button>
+    <button class="qa-btn out" data-quick="egreso"><span class="ic">${icon('plusSimple')}</span>Registrar egreso</button>
+  </div>
+
+
+  <div class="section-title">Últimos 7 días</div>
+  <div class="card">
+    ${renderSparkline(last7, maxv)}
+    <div class="btn-row tiny muted" style="justify-content:space-between; margin-top:6px;">
+      <span><span style="color:var(--success)">●</span> Ingresos</span>
+      <span><span style="color:var(--danger)">●</span> Egresos</span>
+    </div>
+  </div>
+
+  <div class="grid-auto" style="align-items:start;">
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-title" style="margin-top:0;"><span>${icon('star')} &nbsp;Servicios más vendidos</span><span class="tiny muted">Este mes</span></div>
+      ${topSvc.length? topSvc.map((it,i)=>`
+        <div class="rank-row">
+          <div class="rank-num">${i+1}</div>
+          <div class="rank-body"><div class="rank-title">${esc(it.name)}</div><div class="rank-sub">${it.count} ${it.count===1?'venta':'ventas'}</div></div>
+          <div class="rank-val">${fmtMasked(it.amount)}</div>
+        </div>`).join('') : renderEmpty('Sin datos aún','Registra ventas de servicios para ver el ranking.')}
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-title" style="margin-top:0;"><span>${icon('bottle')} &nbsp;Productos más vendidos</span><span class="tiny muted">Este mes</span></div>
+      ${topProd.length? topProd.map((it,i)=>`
+        <div class="rank-row">
+          <div class="rank-num">${i+1}</div>
+          <div class="rank-body"><div class="rank-title">${esc(it.name)}</div><div class="rank-sub">${it.count} ${it.count===1?'unidad':'unidades'}</div></div>
+          <div class="rank-val">${fmtMasked(it.amount)}</div>
+        </div>`).join('') : renderEmpty('Sin datos aún','Registra ventas de productos para ver el ranking.')}
+    </div>
+  </div>
+
+  ${lowStock.length? `
+  <div class="section-title">Inventario bajo</div>
+  <div class="card">
+    ${lowStock.map(p=>`
+      <div class="mv-row">
+        <div class="mv-ic out">${icon('alert')}</div>
+        <div class="mv-body"><div class="mv-title">${esc(p.name)}</div><div class="mv-sub">Quedan ${p.stock} unidades</div></div>
+      </div>`).join('')}
+  </div>` : ''}
+
+  <div class="section-title">Movimientos recientes <a class="link" data-nav="historial" href="#">Ver todo ${icon('arrow')}</a></div>
+  <div class="card">
+    ${recent.length? recent.map(renderMvRow).join('') : renderEmpty('No hay movimientos todavía','Registra tu primer ingreso o egreso desde el botón Nuevo.')}
+  </div>
+  `;
+}
+
+function renderSparkline(days, maxv){
+  const w=560, h=100, bw=(w/days.length)-10;
+  let bars='';
+  days.forEach((d,i)=>{
+    const x=i*(w/days.length)+5;
+    const hin=Math.max(2,(d.in/maxv)*h);
+    const hout=Math.max(2,(d.out/maxv)*h);
+    bars+=`<rect x="${x}" y="${h-hin}" width="${bw/2-2}" height="${hin}" rx="3" fill="#1E8A5C"/>`;
+    bars+=`<rect x="${x+bw/2}" y="${h-hout}" width="${bw/2-2}" height="${hout}" rx="3" fill="#C23B4B"/>`;
+  });
+  const labels = days.map((d,i)=>`<text x="${i*(w/days.length)+5+bw/4}" y="${h+15}" font-size="9.5" fill="#635C6B" text-anchor="middle">${fmtDateShort(d.iso).split(' ')[0]}</text>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h+20}" style="width:100%;height:auto;">${bars}${labels}</svg>`;
+}
+
+function renderEmpty(title, sub){
+  return `<div class="empty-state"><span class="glyph">${icon('save')}</span><b>${esc(title)}</b><div class="small">${esc(sub)}</div></div>`;
+}
+
+function renderMvRow(m){
+  const isIn = m.type==='ingreso';
+  return `
+  <div class="mv-row tappable" data-mv="${m.id}">
+    <div class="mv-ic ${isIn?'in':'out'}">${icon(isIn?'plusSimple':'tag')}</div>
+    <div class="mv-body">
+      <div class="mv-title">${esc(m.concept)}</div>
+      <div class="mv-sub">${fmtDateShort(m.date)}${m.employeeName? ' · '+esc(m.employeeName):''}${m.category? ' · '+esc(m.category):''}${isClosed(m.date)?' · 🔒 cerrado':''}</div>
+    </div>
+    <div class="mv-amt ${isIn?'in':'out'}">${isIn?'+':'-'}${fmtMasked(m.amount)}</div>
+  </div>`;
+}
+
+/* =====================================================================
+   EMPLEADO: HOY
+===================================================================== */
+function renderEmployeeToday(){
+  const t=todayISO();
+  const mine = S.movements.filter(m=> m.date===t && m.createdBy===S.user.username);
+  return `
+  <div class="page-head"><h1>Tus registros de hoy</h1><p>${fmtDateLong(t)}</p></div>
+  <div class="card">
+    ${mine.length? mine.map(m=>`
+      <div class="mv-row">
+        <div class="mv-ic ${m.type==='ingreso'?'in':'out'}">${icon(m.type==='ingreso'?'plusSimple':'tag')}</div>
+        <div class="mv-body"><div class="mv-title">${esc(m.concept)}</div><div class="mv-sub">${m.type==='ingreso'?'Ingreso':'Egreso'}${m.employeeName?' · '+esc(m.employeeName):''}</div></div>
+      </div>`).join('') : renderEmpty('Aún no registras nada hoy','Usa la pestaña Nuevo para agregar tu primer movimiento.')}
+  </div>
+  <div class="tiny muted" style="text-align:center; margin-top:10px;">Este listado es solo de referencia. Los totales y reportes los gestiona el administrador.</div>
+  `;
+}
+
+/* =====================================================================
+   FORMULARIO NUEVO MOVIMIENTO
+===================================================================== */
+function renderMovementForm(isEmployee){
+  const editing = S.editingMovement;
+  const type = editing? editing.type : S.mvType;
+  const subtype = editing? (editing.itemType||'otro') : S.mvSubtype;
+  const activeEmployees = S.employees.filter(e=>e.active!==false);
+  const activeServices = S.services.filter(s=>s.active!==false);
+  const activeProducts = S.products.filter(p=>p.active!==false);
+  const targetDate = editing? editing.date : todayISO();
+  const closedWarning = isClosed(targetDate);
+
+  return `
+  <div class="page-head"><h1>${editing? 'Editar movimiento':'Nuevo movimiento'}</h1><p>Registra ingresos y egresos de caja</p></div>
+
+  ${closedWarning? `<div class="banner warn">${icon('warn')} Este día ya tiene un cierre de caja realizado. Si registras o editas movimientos, el cierre podría quedar descuadrado.</div>`:''}
+
+  <div class="card">
+    <div class="segmented" id="typeSeg">
+      <button type="button" class="${type==='ingreso'?'active in':''}" data-type="ingreso">Ingreso</button>
+      <button type="button" class="${type==='egreso'?'active out':''}" data-type="egreso">Egreso</button>
+    </div>
+  </div>
+
+  <form id="mvForm">
+  ${type==='ingreso' ? `
+    <div class="card">
+      <div class="field">
+        <label>Tipo de ingreso</label>
+        <div class="chips" id="subtypeChips">
+          <button type="button" class="chip ${subtype==='servicio'?'active':''}" data-sub="servicio">${icon('scissors')} Servicio</button>
+          <button type="button" class="chip ${subtype==='producto'?'active':''}" data-sub="producto">${icon('bottle')} Producto</button>
+          <button type="button" class="chip ${subtype==='otro'?'active':''}" data-sub="otro">${icon('tag')} Otro</button>
+        </div>
+      </div>
+
+      ${subtype==='servicio' ? `
+        <div class="field">
+          <label>Servicio</label>
+          <select name="itemId" id="serviceSelect">
+            <option value="">Selecciona un servicio…</option>
+            ${activeServices.map(s=>`<option value="${s.id}" data-price="${s.price}" data-comm="${s.commission}" ${editing&&editing.itemId===s.id?'selected':''}>${esc(s.name)} — ${fmt(s.price)}</option>`).join('')}
+          </select>
+        </div>
+      ` : subtype==='producto' ? `
+        <div class="field">
+          <label>Producto</label>
+          <select name="itemId" id="productSelect">
+            <option value="">Selecciona un producto…</option>
+            ${activeProducts.map(p=>`<option value="${p.id}" data-price="${p.price}" data-comm="${p.commission}" data-stock="${p.stock}" ${editing&&editing.itemId===p.id?'selected':''}>${esc(p.name)} — ${fmt(p.price)} (stock: ${p.stock})</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>Cantidad</label>
+          <input type="number" name="qty" placeholder="1" min="1" step="1" value="${editing&&editing.qty?editing.qty:1}">
+        </div>
+      ` : `
+        <div class="field">
+          <label>Concepto</label>
+          <input type="text" name="conceptOtro" placeholder="Ej. Propina, alquiler de silla, comisión externa…" value="${editing?esc(editing.concept):''}" required>
+        </div>
+      `}
+
+      ${subtype!=='otro' ? `
+        <div class="field">
+          <label>Empleado que realizó el servicio</label>
+          <select name="employeeId" id="employeeSelect">
+            <option value="">Sin empleado asignado</option>
+            ${activeEmployees.map(e=>`<option value="${e.id}" data-comm="${e.defaultCommission}" ${editing&&editing.employeeId===e.id?'selected':''}>${esc(e.name)} (${e.defaultCommission}%)</option>`).join('')}
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Comisión</label>
+            <div class="input-affix suf"><input type="number" name="commissionPercent" placeholder="0" min="0" max="100" step="0.5" value="${editing?editing.commissionPercent:0}"><span>%</span></div>
+          </div>
+          <div class="field">
+            <label>Comisión calculada</label>
+            <div class="input-affix pre"><input type="text" id="commAmountDisplay" value="${fmt(editing?editing.commissionAmount:0).replace('$','')}" disabled><span>$</span></div>
+          </div>
+        </div>
+      `:''}
+
+      <div class="field">
+        <label>Concepto</label>
+        <input type="text" name="conceptFinal" id="conceptFinal" placeholder="Se completa automáticamente" value="${editing?esc(editing.concept):''}">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Monto total</label>
+          <div class="input-affix pre"><input type="number" name="amount" id="amountInput" placeholder="0.00" min="0" step="0.01" value="${editing?editing.amount:''}" required><span>$</span></div>
+        </div>
+        <div class="field">
+          <label>Método de pago</label>
+          <select name="paymentMethod">
+            ${PAY_METHODS.map(pm=>`<option ${editing&&editing.paymentMethod===pm?'selected':''}>${pm}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+    </div>
+  ` : `
+    <div class="card">
+      <div class="field">
+        <label>Categoría de gasto</label>
+        ${S.categories.length? `
+        <select name="category" id="categorySelect">
+          <option value="">Selecciona una categoría…</option>
+          ${S.categories.map(c=>`<option value="${esc(c.name)}" ${editing&&editing.category===c.name?'selected':''}>${esc(c.name)}</option>`).join('')}
+          <option value="__nueva__">+ Nueva categoría…</option>
+        </select>
+        <div id="newCatWrap" style="display:none; margin-top:10px;">
+          <input type="text" id="newCatInput" placeholder="Ej. Insumos, Renta, Nómina…">
+        </div>
+        ` : `
+        <div class="hint" style="margin-bottom:8px;">Aún no tienes categorías de gasto. Crea la primera:</div>
+        <input type="text" id="newCatInput" placeholder="Ej. Insumos, Renta, Nómina…">
+        `}
+      </div>
+      <div class="field">
+        <label>Concepto</label>
+        <input type="text" name="conceptFinal" placeholder="Ej. Compra de shampoo al mayoreo" value="${editing?esc(editing.concept):''}" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Monto</label>
+          <div class="input-affix pre"><input type="number" name="amount" placeholder="0.00" min="0" step="0.01" value="${editing?editing.amount:''}" required><span>$</span></div>
+        </div>
+        <div class="field">
+          <label>Método de pago</label>
+          <select name="paymentMethod">
+            ${PAY_METHODS.map(pm=>`<option ${editing&&editing.paymentMethod===pm?'selected':''}>${pm}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+    </div>
+  `}
+
+    <div class="card">
+      <div class="field">
+        <label>Fecha</label>
+        <input type="date" name="date" value="${editing?editing.date:todayISO()}" max="${todayISO()}">
+      </div>
+      <div class="btn-row">
+        ${editing? `<button type="button" class="btn btn-secondary" id="cancelEdit">Cancelar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} ${editing?'Guardar cambios':'Guardar movimiento'}</button>
+      </div>
+    </div>
+  </form>
+  `;
+}
+
+/* =====================================================================
+   HISTORIAL
+===================================================================== */
+function renderHistorial(){
+  const f=S.histFilter;
+  const {from,to} = rangeFor(f.range);
+  let list = movementsInRange(from,to);
+  if(f.type!=='todos') list=list.filter(m=>m.type===f.type);
+  if(f.q.trim()) list=list.filter(m=> (m.concept||'').toLowerCase().includes(f.q.toLowerCase()) || (m.employeeName||'').toLowerCase().includes(f.q.toLowerCase()));
+
+  const groups={};
+  list.forEach(m=>{ (groups[m.date] = groups[m.date]||[]).push(m); });
+  const dates=Object.keys(groups).sort().reverse();
+
+  return `
+  <div class="page-head"><h1>Historial</h1><p>Consulta, edita o elimina movimientos registrados</p></div>
+  <div class="card">
+    <div class="chips" style="margin-bottom:12px;">
+      ${[['hoy','Hoy'],['semana','Semana'],['mes','Mes']].map(([k,l])=>`<button type="button" class="chip ${f.range===k?'active':''}" data-hist-range="${k}">${l}</button>`).join('')}
+    </div>
+    <div class="field-row" style="margin-bottom:0;">
+      <div class="field" style="margin-bottom:0;">
+        <select id="histType">
+          <option value="todos" ${f.type==='todos'?'selected':''}>Todos los tipos</option>
+          <option value="ingreso" ${f.type==='ingreso'?'selected':''}>Solo ingresos</option>
+          <option value="egreso" ${f.type==='egreso'?'selected':''}>Solo egresos</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <input type="text" id="histSearch" placeholder="Buscar por concepto o empleado…" value="${esc(f.q)}">
+      </div>
+    </div>
+  </div>
+
+  ${dates.length? dates.map(d=>`
+    <div class="divider-label">${fmtDateLong(d)} ${isClosed(d)?'🔒':''}</div>
+    <div class="card">${groups[d].map(renderMvRow).join('')}</div>
+  `).join('') : `<div class="card">${renderEmpty('Sin resultados','Ajusta los filtros o el rango de fechas.')}</div>`}
+  `;
+}
+
+/* =====================================================================
+   REPORTES
+===================================================================== */
+function renderReportes(){
+  const range = S.repRange;
+  const {from,to} = range==='personalizado' ? {from:S.repFrom||todayISO(), to:S.repTo||todayISO()} : rangeFor(range);
+  const list = movementsInRange(from,to);
+  const t = totals(list);
+  const cash = cashByMethod(list);
+
+  const byDay={};
+  list.forEach(m=>{ const b=byDay[m.date]=byDay[m.date]||{in:0,out:0}; if(m.type==='ingreso') b.in+=m.amount; else b.out+=m.amount; });
+  const dayKeys=Object.keys(byDay).sort();
+  const maxv=Math.max(1,...dayKeys.map(k=>Math.max(byDay[k].in,byDay[k].out)));
+
+  const catEntries = Object.entries(t.egresosPorCat).sort((a,b)=>b[1]-a[1]);
+  const maxCat = Math.max(1, ...catEntries.map(e=>e[1]));
+
+  const ingBreak=[['Servicios', t.ingServicios, 'var(--brand)'],['Productos', t.ingProductos, 'var(--accent)'],['Otros', t.ingOtros, 'var(--info)']];
+  const maxIng=Math.max(1,...ingBreak.map(e=>e[1]));
+
+  const topSvc = topItems(list,'servicio',8);
+  const topProd = topItems(list,'producto',8);
+
+  return `
+  <div class="page-head"><h1>Reportes</h1><p>Información financiera en tiempo real</p></div>
+  <div class="card">
+    <div class="chips">
+      ${[['hoy','Hoy'],['semana','Semana'],['mes','Mes'],['personalizado','Personalizado']].map(([k,l])=>`<button type="button" class="chip ${range===k?'active':''}" data-rep-range="${k}">${l}</button>`).join('')}
+    </div>
+    ${range==='personalizado'? `
+    <div class="field-row" style="margin-top:12px; margin-bottom:0;">
+      <div class="field" style="margin-bottom:0;"><label>Desde</label><input type="date" id="repFrom" value="${from}" max="${todayISO()}"></div>
+      <div class="field" style="margin-bottom:0;"><label>Hasta</label><input type="date" id="repTo" value="${to}" max="${todayISO()}"></div>
+    </div>`:''}
+  </div>
+
+  <div class="grid-auto-sm">
+    <div class="kpi"><div class="k-top"><span class="k-lbl">Ingresos</span><div class="k-ic" style="background:var(--success-tint);color:var(--success-dark);">${icon('trend')}</div></div><div class="k-val" style="color:var(--success-dark)">${fmtMasked(t.ingresos)}</div></div>
+    <div class="kpi"><div class="k-top"><span class="k-lbl">Egresos</span><div class="k-ic" style="background:var(--danger-tint);color:var(--danger-dark);">${icon('tag')}</div></div><div class="k-val" style="color:var(--danger-dark)">${fmtMasked(t.egresos)}</div></div>
+    <div class="kpi"><div class="k-top"><span class="k-lbl">Comisiones</span><div class="k-ic" style="background:var(--accent-tint);color:var(--accent-dark);">${icon('users')}</div></div><div class="k-val" style="color:var(--accent-dark)">${fmtMasked(t.comisiones)}</div></div>
+    <div class="kpi"><div class="k-top"><span class="k-lbl">Balance neto</span><div class="k-ic" style="background:var(--brand-tint);color:var(--brand);">${icon('cash')}</div></div><div class="k-val">${fmtMasked(t.balance)}</div></div>
+  </div>
+
+  <div class="section-title">Ingresos vs egresos por día</div>
+  <div class="card">${dayKeys.length? renderDayBars(dayKeys, byDay, maxv) : renderEmpty('Sin movimientos','No hay datos en este rango.')}</div>
+
+  <div class="grid-auto" style="align-items:start;">
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-title" style="margin-top:0;">Ingresos por tipo</div>
+      <div class="barlist">
+        ${ingBreak.map(([lb,val,color])=>`
+          <div class="barrow"><div class="bl-top"><span>${lb}</span><span>${fmtMasked(val)}</span></div>
+          <div class="bartrack"><div class="barfill" style="width:${(val/maxIng)*100}%; background:${color};"></div></div></div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-title" style="margin-top:0;">Egresos por categoría</div>
+      <div class="barlist">
+        ${catEntries.length? catEntries.map(([lb,val])=>`
+          <div class="barrow"><div class="bl-top"><span>${esc(lb)}</span><span>${fmtMasked(val)}</span></div>
+          <div class="bartrack"><div class="barfill" style="width:${(val/maxCat)*100}%; background:var(--danger);"></div></div></div>`).join('') : renderEmpty('Sin egresos','No se registraron egresos en este rango.')}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Caja por método de pago</div>
+  <div class="card grid-auto-sm" style="display:grid;">
+    ${PAY_METHODS.map(pm=>`
+      <div style="padding:10px 4px;">
+        <div class="tiny muted" style="text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:4px;">${pm}</div>
+        <div style="font-family:var(--font-mono);font-weight:700;color:var(--success-dark);">${fmtMasked(cash[pm].in)}</div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--danger-dark);">-${fmtMasked(cash[pm].out)}</div>
+      </div>`).join('')}
+  </div>
+
+  <div class="grid-auto" style="align-items:start;">
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-title" style="margin-top:0;">${icon('star')}&nbsp; Ranking de servicios</div>
+      ${topSvc.length? topSvc.map((it,i)=>`
+        <div class="rank-row"><div class="rank-num">${i+1}</div>
+        <div class="rank-body"><div class="rank-title">${esc(it.name)}</div><div class="rank-sub">${it.count} ventas</div></div>
+        <div class="rank-val">${fmtMasked(it.amount)}</div></div>`).join('') : renderEmpty('Sin datos','No hay ventas de servicios en este rango.')}
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-title" style="margin-top:0;">${icon('bottle')}&nbsp; Ranking de productos</div>
+      ${topProd.length? topProd.map((it,i)=>`
+        <div class="rank-row"><div class="rank-num">${i+1}</div>
+        <div class="rank-body"><div class="rank-title">${esc(it.name)}</div><div class="rank-sub">${it.count} unidades</div></div>
+        <div class="rank-val">${fmtMasked(it.amount)}</div></div>`).join('') : renderEmpty('Sin datos','No hay ventas de productos en este rango.')}
+    </div>
+  </div>
+
+  <div class="section-title">Exportar reporte</div>
+  <div class="card">
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="exportCsv">${icon('dl')} CSV</button>
+      <button class="btn btn-success" id="exportExcel">${icon('excel')} Excel</button>
+      <button class="btn btn-secondary" id="exportPdf">${icon('print')} PDF</button>
+    </div>
+  </div>
+  `;
+}
+
+function renderDayBars(dayKeys, byDay, maxv){
+  const w=600, h=120, bw=(w/dayKeys.length)-8;
+  let bars='', labels='';
+  dayKeys.forEach((k,i)=>{
+    const x=i*(w/dayKeys.length)+4;
+    const hin=Math.max(2,(byDay[k].in/maxv)*h);
+    const hout=Math.max(2,(byDay[k].out/maxv)*h);
+    bars+=`<rect x="${x}" y="${h-hin}" width="${bw/2-1.5}" height="${hin}" rx="3" fill="#1E8A5C"/>`;
+    bars+=`<rect x="${x+bw/2}" y="${h-hout}" width="${bw/2-1.5}" height="${hout}" rx="3" fill="#C23B4B"/>`;
+    labels+=`<text x="${x+bw/4}" y="${h+14}" font-size="8.5" fill="#635C6B" text-anchor="middle">${fmtDateShort(k).split(' ')[0]}</text>`;
+  });
+  return `<svg viewBox="0 0 ${w} ${h+20}" style="width:100%;height:auto;">${bars}${labels}</svg>`;
+}
+
+/* =====================================================================
+   CAJA: APERTURA Y CIERRE
+===================================================================== */
+function renderCierre(){
+  const t=todayISO();
+  const todayOpening = getOpening(t);
+  const todayClosing = S.closings.find(c=>c.date===t);
+  const todays = movementsInRange(t,t);
+  const cash = cashByMethod(todays);
+  const tt = totals(todays);
+  const expected = expectedCashFor(t);
+
+  const mergedDates = [...new Set([...S.openings.map(o=>o.date), ...S.closings.map(c=>c.date)])].sort().reverse();
+
+  return `
+  <div class="page-head"><h1>Caja diaria</h1><p>Apertura y cierre para cuadrar el efectivo cada día</p></div>
+
+  <div class="card">
+    <div class="section-title" style="margin-top:0;">${icon('drawer')}&nbsp; Apertura · ${fmtDateLong(t)}</div>
+    ${todayOpening? `
+      <div class="banner success">${icon('check')} Caja abierta por ${esc(todayOpening.openedBy)} con un fondo inicial de <b>&nbsp;${fmt(todayOpening.openingCash)}</b>.</div>
+      ${todayOpening.notes? `<div class="small muted" style="margin-bottom:10px;"><b>Notas:</b> ${esc(todayOpening.notes)}</div>`:''}
+      <div class="btn-row">
+        <button class="btn btn-secondary" data-edit-apertura="${todayOpening.id}">${icon('edit')} Editar apertura</button>
+        <button class="btn btn-danger" data-del="apertura" data-delid="${todayOpening.id}">${icon('trash')} Eliminar</button>
+      </div>
+    ` : `
+      <div class="banner warn">${icon('warn')} Aún no registras el fondo inicial de hoy. El efectivo esperado del cierre partirá de $0.00 hasta que la registres.</div>
+      <button class="btn btn-primary" data-open-apertura="1">${icon('drawer')} Registrar apertura de hoy</button>
+    `}
+  </div>
+
+  <div class="card">
+    <div class="section-title" style="margin-top:0;">${icon('cash')}&nbsp; Cierre · ${fmtDateLong(t)}</div>
+    ${todayClosing? `
+      <div class="banner success">${icon('check')} El cierre de hoy ya fue realizado por ${esc(todayClosing.closedBy)} a las ${new Date(todayClosing.closedAt).toLocaleTimeString('es-SV',{hour:'2-digit',minute:'2-digit'})}.</div>
+      ${renderClosingSummary(todayClosing)}
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn btn-secondary" data-edit-cierre="${todayClosing.id}">${icon('edit')} Editar cierre</button>
+        <button class="btn btn-danger" data-del="cierre" data-delid="${todayClosing.id}">${icon('trash')} Eliminar cierre</button>
+      </div>
+    ` : `
+      <div class="grid-auto-sm" style="margin-bottom:14px;">
+        <div class="kpi"><div class="k-lbl">Fondo inicial</div><div class="k-val">${fmt(todayOpening?todayOpening.openingCash:0)}</div></div>
+        <div class="kpi"><div class="k-lbl">Ingresos efectivo</div><div class="k-val" style="color:var(--success-dark)">${fmt(cash['Efectivo'].in)}</div></div>
+        <div class="kpi"><div class="k-lbl">Egresos efectivo</div><div class="k-val" style="color:var(--danger-dark)">${fmt(cash['Efectivo'].out)}</div></div>
+        <div class="kpi"><div class="k-lbl">Efectivo esperado</div><div class="k-val">${fmt(expected)}</div></div>
+      </div>
+      <button class="btn btn-primary" data-open-cierre="1">${icon('drawer')} Realizar cierre de hoy</button>
+    `}
+  </div>
+
+  <div class="section-title">Historial de caja</div>
+  <div class="card">
+    ${mergedDates.length? mergedDates.map(d=>{
+      const o = S.openings.find(x=>x.date===d);
+      const c = S.closings.find(x=>x.date===d);
+      return `
+      <div class="mv-row tappable" data-caja-detail="${d}">
+        <div class="mv-ic ${c? (Math.abs(c.difference)<0.01?'in':'out') : 'in'}">${icon('drawer')}</div>
+        <div class="mv-body">
+          <div class="mv-title">${fmtDateLong(d)}</div>
+          <div class="mv-sub">${o? 'Apertura '+fmt(o.openingCash) : 'Sin apertura'} · ${c? (c.difference===0?'Cuadrado':(c.difference>0?'Sobrante ':'Faltante ')+fmt(Math.abs(c.difference))) : 'Cierre pendiente'}</div>
+        </div>
+        ${c? `<div class="mv-amt ${Math.abs(c.difference)<0.01?'in':'out'}">${c.difference>=0?'+':''}${fmt(c.difference)}</div>` : `<span class="badge-pill off">Pendiente</span>`}
+      </div>`;
+    }).join('') : renderEmpty('Sin registros de caja','Las aperturas y cierres aparecerán aquí una vez que los realices.')}
+  </div>
+  `;
+}
+
+function renderClosingSummary(c){
+  return `
+  <div class="grid-auto-sm">
+    <div class="kpi"><div class="k-lbl">Efectivo esperado</div><div class="k-val">${fmt(c.expectedCash)}</div></div>
+    <div class="kpi"><div class="k-lbl">Efectivo contado</div><div class="k-val">${fmt(c.countedCash)}</div></div>
+    <div class="kpi"><div class="k-lbl">${c.difference===0?'Cuadrado':(c.difference>0?'Sobrante':'Faltante')}</div><div class="k-val" style="color:${c.difference===0?'var(--success-dark)':'var(--danger-dark)'}">${c.difference>=0?'+':''}${fmt(c.difference)}</div></div>
+  </div>
+  ${c.notes? `<div class="small muted" style="margin-top:10px;"><b>Notas:</b> ${esc(c.notes)}</div>`:''}
+  `;
+}
+
+function openAperturaSheet(id){
+  const t=todayISO();
+  const o = id? S.openings.find(x=>x.id===id) : null;
+  const date = o? o.date : t;
+  const hasClosing = S.closings.some(c=>c.date===date);
+  openSheet(`
+    ${sheetHeader(id?'Editar apertura de caja':'Apertura de caja')}
+    <form id="aperturaForm" data-id="${id||''}" data-date="${date}">
+      ${hasClosing? `<div class="banner warn">${icon('warn')} Este día ya tiene un cierre registrado. Cambiar el fondo inicial no actualizará automáticamente ese cierre; revísalo después de guardar.</div>`:''}
+      <div class="field">
+        <label>Fondo inicial (efectivo con el que abres caja)</label>
+        <div class="input-affix pre"><input type="number" name="openingCash" placeholder="0.00" min="0" step="0.01" value="${o?o.openingCash:''}" required><span>$</span></div>
+        <div class="hint">Ej. billetes y monedas pequeñas que dejas para dar cambio.</div>
+      </div>
+      <div class="field">
+        <label>Notas (opcional)</label>
+        <textarea name="notes" placeholder="Ej. Fondo fijo estándar del salón…">${o?esc(o.notes||''):''}</textarea>
+      </div>
+      <div class="btn-row">
+        ${id?`<button type="button" class="btn btn-danger" data-del="apertura" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar apertura</button>
+      </div>
+    </form>`);
+}
+function openCierreSheet(id){
+  const t=todayISO();
+  const c = id? S.closings.find(x=>x.id===id) : null;
+  const date = c? c.date : t;
+  const opening = getOpening(date);
+  const openingAmt = opening? opening.openingCash : 0;
+  const dayCash = cashByMethod(movementsInRange(date,date));
+  const expected = expectedCashFor(date);
+  openSheet(`
+    ${sheetHeader(id?'Editar cierre de caja':'Cierre de caja')}
+    <form id="cierreForm" data-id="${id||''}" data-date="${date}">
+      ${!opening? `<div class="banner warn">${icon('warn')} No hay apertura registrada para este día; el fondo inicial se está tomando como $0.00.</div>`:''}
+      <div class="banner info">
+        ${icon('cash')}
+        <div>
+          Efectivo esperado en caja: <b>${fmt(expected)}</b>
+          <div class="tiny" style="margin-top:4px;opacity:.85;">Fondo inicial ${fmt(openingAmt)} + ventas en efectivo ${fmt(dayCash['Efectivo'].in)} − gastos en efectivo ${fmt(dayCash['Efectivo'].out)}</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Efectivo contado físicamente</label>
+        <div class="input-affix pre"><input type="number" name="countedCash" placeholder="0.00" min="0" step="0.01" value="${c?c.countedCash:''}" required><span>$</span></div>
+      </div>
+      <div class="field">
+        <label>Notas (opcional)</label>
+        <textarea name="notes" placeholder="Ej. Faltaron $2 por vuelto mal dado en la mañana…">${c?esc(c.notes||''):''}</textarea>
+      </div>
+      <div class="btn-row">
+        ${id?`<button type="button" class="btn btn-danger" data-del="cierre" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar cierre</button>
+      </div>
+    </form>`);
+}
+function openCajaDetalle(date){
+  const o = getOpening(date);
+  const c = S.closings.find(x=>x.date===date);
+  openSheet(`
+    ${sheetHeader('Caja · '+fmtDateLong(date))}
+    <div class="section-title" style="margin-top:0;">Apertura</div>
+    ${o? `
+      <div class="card" style="box-shadow:none;border:1px solid var(--line);">
+        <div class="small"><b>Fondo inicial:</b> ${fmt(o.openingCash)}</div>
+        <div class="small muted">Abierta por ${esc(o.openedBy)} · ${fmtDateTime(o.openedAt)}</div>
+        ${o.notes?`<div class="small" style="margin-top:6px;"><b>Notas:</b> ${esc(o.notes)}</div>`:''}
+      </div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn btn-secondary btn-sm" data-edit-apertura="${o.id}">${icon('edit')} Editar</button>
+        <button class="btn btn-danger btn-sm" data-del="apertura" data-delid="${o.id}">${icon('trash')} Eliminar</button>
+      </div>
+    ` : renderEmpty('Sin apertura','Este día no tiene fondo inicial registrado.')}
+
+    <div class="section-title">Cierre</div>
+    ${c? `
+      ${renderClosingSummary(c)}
+      <div class="small muted" style="margin-top:10px;">Cerrado por ${esc(c.closedBy)} · ${fmtDateTime(c.closedAt)}</div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn btn-secondary btn-sm" data-edit-cierre="${c.id}">${icon('edit')} Editar</button>
+        <button class="btn btn-danger btn-sm" data-del="cierre" data-delid="${c.id}">${icon('trash')} Eliminar</button>
+      </div>
+    ` : renderEmpty('Sin cierre','Este día no tiene cierre de caja registrado.')}
+  `);
+}
+
+/* =====================================================================
+   MÁS (menú móvil)
+===================================================================== */
+function renderMas(){
+  const items=[
+    {v:'cierre', ic:'drawer', t:'Caja diaria', s:'Apertura y cierre de efectivo'},
+    {v:'catalogo', ic:'scissors', t:'Catálogo', s:'Servicios, productos, empleados y categorías'},
+    {v:'usuarios', ic:'users', t:'Usuarios', s:'Cuentas de acceso al sistema'},
+    {v:'respaldo', ic:'save', t:'Respaldo de datos', s:'Exportar, restaurar o enviar por correo'},
+    {v:'ajustes', ic:'settings', t:'Ajustes', s:'Seguridad, marca y preferencias'},
+  ];
+  return `
+  <div class="page-head"><h1>Más opciones</h1></div>
+  <div class="card" style="padding:6px 12px;">
+    ${items.map(it=>`
+    <button class="menu-item" data-nav="${it.v}">
+      <div class="mi-ic">${icon(it.ic)}</div>
+      <div class="mi-txt"><div class="mi-title">${it.t}</div><div class="mi-sub">${it.s}</div></div>
+      <div class="chev">${icon('arrow')}</div>
+    </button>`).join('')}
+    <button class="menu-item" data-action="lock">
+      <div class="mi-ic">${icon('lock')}</div>
+      <div class="mi-txt"><div class="mi-title">Bloquear sesión</div></div>
+      <div class="chev">${icon('arrow')}</div>
+    </button>
+    <button class="menu-item" data-action="logout">
+      <div class="mi-ic">${icon('logout')}</div>
+      <div class="mi-txt"><div class="mi-title">Cerrar sesión</div></div>
+      <div class="chev">${icon('arrow')}</div>
+    </button>
+  </div>
+  <div class="tiny muted" style="text-align:center; margin-top:14px;">Todos los datos se guardan únicamente en este dispositivo. Haz respaldos periódicos.</div>
+  `;
+}
+
+/* =====================================================================
+   CATÁLOGO
+===================================================================== */
+function renderCatalogo(){
+  const tab=S.catTab;
+  return `
+  <div class="pageback"><button class="icon-btn" data-nav="mas">${icon('back')}</button><div class="page-head" style="margin-bottom:0;"><h1>Catálogo</h1></div></div>
+  <div class="tabs" style="margin-top:14px;">
+    ${[['servicios','Servicios'],['productos','Productos'],['empleados','Empleados'],['categorias','Categorías de gasto']].map(([k,l])=>`<button class="tab-btn ${tab===k?'active':''}" data-cattab="${k}">${l}</button>`).join('')}
+  </div>
+  ${tab==='servicios'?renderCatServices():''}
+  ${tab==='productos'?renderCatProducts():''}
+  ${tab==='empleados'?renderCatEmployees():''}
+  ${tab==='categorias'?renderCatCategories():''}
+  `;
+}
+function catStatusPill(active){ return `<span class="badge-pill ${active!==false?'on':'off'}">${active!==false?'Activo':'Inactivo'}</span>`; }
+
+function renderCatServices(){
+  return `
+  <div class="card"><button class="btn btn-primary btn-sm" data-add="servicio">${icon('plusSimple')} Agregar servicio</button></div>
+  <div class="card">
+    ${S.services.length? S.services.map(s=>`
+      <div class="mv-row">
+        <div class="mv-ic in">${icon('scissors')}</div>
+        <div class="mv-body"><div class="mv-title">${esc(s.name)} ${catStatusPill(s.active)}</div><div class="mv-sub">${fmt(s.price)} · comisión ${s.commission}%</div></div>
+        <button class="icon-btn" data-edit-servicio="${s.id}">${icon('edit')}</button>
+      </div>`).join('') : renderEmpty('Sin servicios','Agrega el primer servicio de tu catálogo.')}
+  </div>`;
+}
+function renderCatProducts(){
+  return `
+  <div class="card"><button class="btn btn-primary btn-sm" data-add="producto">${icon('plusSimple')} Agregar producto</button></div>
+  <div class="card">
+    ${S.products.length? S.products.map(p=>{
+      const low = p.stock<=LOW_STOCK;
+      return `
+      <div class="mv-row">
+        <div class="mv-ic ${low?'out':'in'}">${icon('bottle')}</div>
+        <div class="mv-body">
+          <div class="mv-title">${esc(p.name)} ${catStatusPill(p.active)}</div>
+          <div class="mv-sub">${fmt(p.price)} · comisión ${p.commission}% · stock ${p.stock}${low?' ⚠️':''}</div>
+          <div class="stockbar"><div style="width:${Math.min(100,(p.stock/15)*100)}%; background:${low?'var(--danger)':'var(--success)'};"></div></div>
+        </div>
+        <button class="icon-btn" data-edit-producto="${p.id}">${icon('edit')}</button>
+      </div>`;
+    }).join('') : renderEmpty('Sin productos','Agrega el primer producto de tu catálogo.')}
+  </div>`;
+}
+function renderCatEmployees(){
+  return `
+  <div class="card"><button class="btn btn-primary btn-sm" data-add="empleado">${icon('plusSimple')} Agregar empleado</button></div>
+  <div class="card">
+    ${S.employees.length? S.employees.map(e=>`
+      <div class="mv-row">
+        <div class="mv-ic in">${icon('users')}</div>
+        <div class="mv-body"><div class="mv-title">${esc(e.name)} ${catStatusPill(e.active)}</div><div class="mv-sub">Comisión por defecto: ${e.defaultCommission}%${e.phone?' · '+esc(e.phone):''}</div></div>
+        <button class="icon-btn" data-edit-empleado="${e.id}">${icon('edit')}</button>
+      </div>`).join('') : renderEmpty('Sin empleados','Agrega el primer miembro del equipo.')}
+  </div>`;
+}
+function renderCatCategories(){
+  return `
+  <div class="card"><button class="btn btn-primary btn-sm" data-add="categoria">${icon('plusSimple')} Agregar categoría</button></div>
+  <div class="card">
+    ${S.categories.length? S.categories.map(c=>`
+      <div class="mv-row">
+        <div class="mv-ic out">${icon('tag')}</div>
+        <div class="mv-body"><div class="mv-title">${esc(c.name)}</div></div>
+        <button class="icon-btn" data-edit-categoria="${c.id}">${icon('edit')}</button>
+      </div>`).join('') : renderEmpty('Sin categorías','Crea categorías como Insumos, Renta o Nómina.')}
+  </div>`;
+}
+
+/* =====================================================================
+   USUARIOS
+===================================================================== */
+function renderUsuarios(){
+  return `
+  <div class="pageback"><button class="icon-btn" data-nav="mas">${icon('back')}</button><div class="page-head" style="margin-bottom:0;"><h1>Usuarios</h1></div></div>
+  <div class="card" style="margin-top:14px;"><button class="btn btn-primary btn-sm" data-add="usuario">${icon('plusSimple')} Agregar usuario</button></div>
+  <div class="card">
+    ${S.users.map(u=>`
+      <div class="mv-row">
+        <div class="mv-ic in">${icon('users')}</div>
+        <div class="mv-body"><div class="mv-title">${esc(u.name)} <span class="badge-pill role">${u.role}</span> ${catStatusPill(u.active)}</div><div class="mv-sub">@${esc(u.username)}</div></div>
+        <button class="icon-btn" data-edit-usuario="${u.id}">${icon('edit')}</button>
+      </div>`).join('')}
+  </div>`;
+}
+
+/* =====================================================================
+   RESPALDO
+===================================================================== */
+function renderRespaldo(){
+  return `
+  <div class="pageback"><button class="icon-btn" data-nav="mas">${icon('back')}</button><div class="page-head" style="margin-bottom:0;"><h1>Respaldo de datos</h1></div></div>
+  <div class="banner info" style="margin-top:14px;">${icon('shield')} Tus datos viven únicamente en este teléfono. No hay servidores intermedios — por eso los respaldos periódicos son tu red de seguridad.</div>
+
+  <div class="card">
+    <div class="mi-title" style="margin-bottom:6px;">Descargar respaldo</div>
+    <div class="small muted" style="margin-bottom:12px;">Incluye movimientos, catálogo, empleados, usuarios y cierres de caja.</div>
+    <div class="switch-row">
+      <div><div style="font-size:13px;font-weight:600;">Proteger con contraseña</div><div class="tiny muted">Cifra el archivo (AES-256) para que solo tú puedas abrirlo</div></div>
+      <label class="switch"><input type="checkbox" id="encryptToggle"><span class="track"></span><span class="thumb"></span></label>
+    </div>
+    <div class="field" id="encryptPwWrap" style="display:none; margin-top:10px;">
+      <label>Contraseña del respaldo</label>
+      <div class="pw-wrap"><input type="password" id="backupPassphrase" placeholder="Crea una contraseña para el archivo"><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div>
+    </div>
+    <div class="btn-row" style="margin-top:12px;">
+      <button class="btn btn-secondary" id="doExport">${icon('dl')} Descargar (.json)</button>
+      <button class="btn btn-primary" id="doEmailShare">${icon('mail')} Enviar por correo</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="mi-title" style="margin-bottom:6px;">Restaurar respaldo</div>
+    <div class="small muted" style="margin-bottom:12px;">Esto reemplazará todos los datos actuales del dispositivo por los del archivo seleccionado.</div>
+    <input type="file" id="importFile" accept="application/json" style="margin-bottom:10px;">
+    <div class="field" id="decryptPwWrap" style="display:none;">
+      <label>Contraseña del respaldo</label>
+      <div class="pw-wrap"><input type="password" id="restorePassphrase" placeholder="Si el archivo está protegido, ingrésala aquí"><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div>
+    </div>
+    <button class="btn btn-secondary" id="doImport">${icon('ul')} Restaurar desde archivo</button>
+  </div>
+  `;
+}
+
+/* =====================================================================
+   AJUSTES
+===================================================================== */
+function renderAjustes(){
+  return `
+  <div class="pageback"><button class="icon-btn" data-nav="mas">${icon('back')}</button><div class="page-head" style="margin-bottom:0;"><h1>Ajustes</h1></div></div>
+
+  <div class="section-title" style="margin-top:14px;">Identidad del negocio</div>
+  <div class="card">
+    <div class="field">
+      <label>Logo del salón</label>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+        <div style="width:56px;height:56px;border-radius:12px;background:var(--paper-dim);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;border:1px solid var(--line);">
+          ${S.meta.logoDataUrl? `<img src="${S.meta.logoDataUrl}" alt="Logo" style="width:100%;height:100%;object-fit:cover;">` : `<span style="font-family:var(--font-display);font-size:22px;color:var(--brand);">C</span>`}
+        </div>
+        <div class="tiny muted">Se mostrará en el inicio de sesión, el menú y los reportes en PDF.<br>Formatos JPG o PNG, máximo 900 KB.</div>
+      </div>
+      <div class="btn-row">
+        <label class="btn btn-secondary btn-sm" style="cursor:pointer;">${icon('save')} ${S.meta.logoDataUrl?'Cambiar logo':'Subir logo'}<input type="file" id="logoFileInput" accept="image/*" style="display:none;"></label>
+        ${S.meta.logoDataUrl? `<button type="button" class="btn btn-danger btn-sm" id="removeLogoBtn">${icon('trash')} Quitar logo</button>`:''}
+      </div>
+    </div>
+    <form id="brandForm">
+      <div class="field"><label>Nombre del salón</label><input type="text" name="salonName" placeholder="Ej. Carlos Rodríguez Salón" value="${esc(S.meta.salonName||'')}" required></div>
+      <div class="field"><label>Correo para respaldos</label><input type="email" name="backupEmail" placeholder="tucorreo@ejemplo.com" value="${esc(S.meta.backupEmail||'')}"></div>
+      <button class="btn btn-primary" type="submit">${icon('check')} Guardar</button>
+    </form>
+  </div>
+
+  <div class="section-title">Seguridad y privacidad</div>
+  <div class="card">
+    <div class="switch-row">
+      <div><div style="font-size:13px;font-weight:600;">Mostrar montos por defecto</div><div class="tiny muted">Oculta cifras en el dashboard con un toque (modo privado)</div></div>
+      <label class="switch"><input type="checkbox" id="showAmountsToggle" ${S.meta.showAmounts!==false?'checked':''}><span class="track"></span><span class="thumb"></span></label>
+    </div>
+    <div class="field" style="margin-top:14px;">
+      <label>Bloqueo automático por inactividad</label>
+      <select id="lockMinutesSelect">
+        <option value="0" ${Number(S.meta.lockMinutes)===0?'selected':''}>Nunca</option>
+        <option value="5" ${Number(S.meta.lockMinutes)===5?'selected':''}>Después de 5 minutos</option>
+        <option value="10" ${Number(S.meta.lockMinutes)===10?'selected':''}>Después de 10 minutos</option>
+        <option value="30" ${Number(S.meta.lockMinutes)===30?'selected':''}>Después de 30 minutos</option>
+      </select>
+      <div class="hint">Al superar el tiempo de inactividad, pedirá tu contraseña sin cerrar la sesión.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Mi cuenta</div>
+  <div class="card">
+    <form id="usernameSelfForm">
+      <div class="field"><label>Nombre completo</label><input type="text" name="name" placeholder="Ej. Carlos Rodríguez" value="${esc(S.user.name)}" required></div>
+      <div class="field"><label>Nombre de usuario</label><input type="text" name="username" id="selfUsernameInput" placeholder="Ej. carlos" value="${esc(S.user.username)}" required></div>
+      <button class="btn btn-secondary" type="submit">${icon('users')} Guardar datos de cuenta</button>
+    </form>
+  </div>
+  <div class="card">
+    <form id="pwForm">
+      <div class="field"><label>Contraseña actual</label><div class="pw-wrap"><input type="password" name="current" placeholder="Tu contraseña actual" required><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div></div>
+      <div class="field"><label>Nueva contraseña</label><div class="pw-wrap"><input type="password" name="next" placeholder="Mínimo 4 caracteres" minlength="4" required><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div></div>
+      <div class="field"><label>Confirmar nueva contraseña</label><div class="pw-wrap"><input type="password" name="confirm" placeholder="Repite la nueva contraseña" minlength="4" required><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div></div>
+      <button class="btn btn-primary" type="submit">${icon('key')} Actualizar contraseña</button>
+    </form>
+  </div>
+  `;
+}
+
+/* =====================================================================
+   SHEETS (modales)
+===================================================================== */
+function openSheet(html){
+  const wrap=document.createElement('div');
+  wrap.className='overlay';
+  wrap.id='sheetOverlay';
+  wrap.innerHTML=`<div class="sheet">${html}</div>`;
+  document.body.appendChild(wrap);
+  wrap.addEventListener('click',(e)=>{ if(e.target===wrap) closeSheet(); });
+  bindSheetEvents();
+}
+function closeSheet(){ const o=$('#sheetOverlay'); if(o) o.remove(); }
+function sheetHeader(title){
+  return `<div class="sheet-handle"></div><div class="sheet-head"><h3>${esc(title)}</h3><button class="sheet-close" data-close-sheet>${icon('x')}</button></div>`;
+}
+
+function openServicioSheet(id){
+  const s = id? S.services.find(x=>x.id===id) : {name:'',price:'',commission:10,active:true};
+  openSheet(`
+    ${sheetHeader(id?'Editar servicio':'Nuevo servicio')}
+    <form id="catForm" data-kind="servicio" data-id="${id||''}">
+      <div class="field"><label>Nombre</label><input type="text" name="name" placeholder="Ej. Corte de cabello dama" value="${esc(s.name)}" required></div>
+      <div class="field-row">
+        <div class="field"><label>Precio</label><div class="input-affix pre"><input type="number" name="price" placeholder="0.00" min="0" step="0.01" value="${s.price}" required><span>$</span></div></div>
+        <div class="field"><label>Comisión</label><div class="input-affix suf"><input type="number" name="commission" placeholder="0" min="0" max="100" step="0.5" value="${s.commission}" required><span>%</span></div></div>
+      </div>
+      <div class="field"><label>Estado</label>
+        <select name="active"><option value="1" ${s.active!==false?'selected':''}>Activo</option><option value="0" ${s.active===false?'selected':''}>Inactivo</option></select>
+      </div>
+      <div class="btn-row">
+        ${id?`<button type="button" class="btn btn-danger" data-del="servicio" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar</button>
+      </div>
+    </form>`);
+}
+function openProductoSheet(id){
+  const p = id? S.products.find(x=>x.id===id) : {name:'',price:'',commission:5,stock:0,active:true};
+  openSheet(`
+    ${sheetHeader(id?'Editar producto':'Nuevo producto')}
+    <form id="catForm" data-kind="producto" data-id="${id||''}">
+      <div class="field"><label>Nombre</label><input type="text" name="name" placeholder="Ej. Shampoo profesional 250ml" value="${esc(p.name)}" required></div>
+      <div class="field-row">
+        <div class="field"><label>Precio</label><div class="input-affix pre"><input type="number" name="price" placeholder="0.00" min="0" step="0.01" value="${p.price}" required><span>$</span></div></div>
+        <div class="field"><label>Comisión</label><div class="input-affix suf"><input type="number" name="commission" placeholder="0" min="0" max="100" step="0.5" value="${p.commission}" required><span>%</span></div></div>
+      </div>
+      <div class="field"><label>Stock disponible</label><input type="number" name="stock" placeholder="0" min="0" step="1" value="${p.stock}" required></div>
+      <div class="field"><label>Estado</label>
+        <select name="active"><option value="1" ${p.active!==false?'selected':''}>Activo</option><option value="0" ${p.active===false?'selected':''}>Inactivo</option></select>
+      </div>
+      <div class="btn-row">
+        ${id?`<button type="button" class="btn btn-danger" data-del="producto" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar</button>
+      </div>
+    </form>`);
+}
+function openEmpleadoSheet(id){
+  const e = id? S.employees.find(x=>x.id===id) : {name:'',phone:'',defaultCommission:10,active:true};
+  openSheet(`
+    ${sheetHeader(id?'Editar empleado':'Nuevo empleado')}
+    <form id="catForm" data-kind="empleado" data-id="${id||''}">
+      <div class="field"><label>Nombre completo</label><input type="text" name="name" placeholder="Ej. María López" value="${esc(e.name)}" required></div>
+      <div class="field"><label>Teléfono</label><input type="tel" name="phone" id="empPhone" placeholder="7123-4567" value="${esc(e.phone||'')}" maxlength="9"></div>
+      <div class="field"><label>Comisión por defecto</label><div class="input-affix suf"><input type="number" name="defaultCommission" placeholder="0" min="0" max="100" step="0.5" value="${e.defaultCommission}" required><span>%</span></div></div>
+      <div class="field"><label>Estado</label>
+        <select name="active"><option value="1" ${e.active!==false?'selected':''}>Activo</option><option value="0" ${e.active===false?'selected':''}>Inactivo</option></select>
+      </div>
+      <div class="btn-row">
+        ${id?`<button type="button" class="btn btn-danger" data-del="empleado" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar</button>
+      </div>
+    </form>`);
+}
+function openCategoriaSheet(id){
+  const c = id? S.categories.find(x=>x.id===id) : {name:''};
+  openSheet(`
+    ${sheetHeader(id?'Editar categoría':'Nueva categoría de gasto')}
+    <form id="catForm" data-kind="categoria" data-id="${id||''}">
+      <div class="field"><label>Nombre</label><input type="text" name="name" placeholder="Ej. Insumos, Renta, Nómina…" value="${esc(c.name)}" required></div>
+      <div class="btn-row">
+        ${id?`<button type="button" class="btn btn-danger" data-del="categoria" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar</button>
+      </div>
+    </form>`);
+}
+function openUsuarioSheet(id){
+  const u = id? S.users.find(x=>x.id===id) : {username:'',name:'',role:'empleado',active:true};
+  const isSelf = id && S.user.id===id;
+  openSheet(`
+    ${sheetHeader(id?'Editar usuario':'Nuevo usuario')}
+    <form id="userForm" data-id="${id||''}">
+      <div class="field"><label>Nombre completo</label><input type="text" name="name" placeholder="Ej. Vanessa Reyes" value="${esc(u.name)}" required></div>
+      <div class="field"><label>Usuario</label><input type="text" name="username" id="usernameInput" placeholder="Ej. vanessa" value="${esc(u.username)}" required></div>
+      <div class="field"><label>Rol</label>
+        <select name="role"><option value="admin" ${u.role==='admin'?'selected':''}>Administrador</option><option value="empleado" ${u.role==='empleado'?'selected':''}>Empleado</option></select>
+      </div>
+      <div class="field"><label>Estado</label>
+        <select name="active"><option value="1" ${u.active!==false?'selected':''}>Activo</option><option value="0" ${u.active===false?'selected':''}>Inactivo</option></select>
+      </div>
+      <div class="field"><label>${id?'Nueva contraseña (dejar en blanco para no cambiar)':'Contraseña'}</label><div class="pw-wrap"><input type="password" name="password" placeholder="${id?'Dejar en blanco para conservar':'Crea una contraseña'}" ${id?'':'required'}><button type="button" class="pw-toggle" tabindex="-1" aria-label="Mostrar contraseña">${icon('eye')}</button></div></div>
+      <div class="btn-row">
+        ${id && !isSelf?`<button type="button" class="btn btn-danger" data-del="usuario" data-delid="${id}">${icon('trash')} Eliminar</button>`:''}
+        <button type="submit" class="btn btn-primary">${icon('check')} Guardar</button>
+      </div>
+    </form>`);
+}
+function openMovimientoDetalle(id){
+  const m = S.movements.find(x=>x.id===id);
+  if(!m) return;
+  const isIn=m.type==='ingreso';
+  openSheet(`
+    ${sheetHeader('Detalle del movimiento')}
+    <div class="card" style="box-shadow:none; border:1px solid var(--line);">
+      <div class="mv-amt ${isIn?'in':'out'}" style="font-size:26px; margin-bottom:8px;">${isIn?'+':'-'}${fmt(m.amount)}</div>
+      <div class="small muted">${fmtDateLong(m.date)}</div>
+      <hr class="receipt-dash" style="border-top-color:var(--line);">
+      <div class="small"><b>Concepto:</b> ${esc(m.concept)}</div>
+      ${m.employeeName? `<div class="small"><b>Empleado:</b> ${esc(m.employeeName)}</div>`:''}
+      ${m.category? `<div class="small"><b>Categoría:</b> ${esc(m.category)}</div>`:''}
+      ${m.paymentMethod? `<div class="small"><b>Pago:</b> ${esc(m.paymentMethod)}</div>`:''}
+      ${m.commissionAmount? `<div class="small"><b>Comisión:</b> ${fmt(m.commissionAmount)} (${m.commissionPercent}%)</div>`:''}
+      ${m.qty? `<div class="small"><b>Cantidad:</b> ${m.qty}</div>`:''}
+      <div class="small"><b>Registrado por:</b> ${esc(m.createdBy)}</div>
+    </div>
+    <div class="btn-row" style="margin-top:14px;">
+      <button class="btn btn-secondary" id="editMvBtn" data-editmv="${m.id}">${icon('edit')} Editar</button>
+      <button class="btn btn-danger" id="delMvBtn" data-delmv="${m.id}">${icon('trash')} Eliminar</button>
+    </div>
+  `);
+}
+
+/* =====================================================================
+   BINDINGS GLOBALES
+===================================================================== */
+function bindGlobalEvents(){
+  const lf=$('#loginForm');
+  if(lf){
+    bindPasswordToggles($('#app'));
+    lf.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const fd=new FormData(lf);
+      const r = await login(fd.get('username'), fd.get('password'));
+      if(r.ok) render();
+      else $('#loginErr').innerHTML = `<div class="login-err">${icon('alert')} ${esc(r.msg)}</div>`;
+    });
+    return;
+  }
+  const uf=$('#unlockForm');
+  if(uf){
+    bindPasswordToggles($('#app'));
+    uf.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const fd=new FormData(uf);
+      const ok = await unlock(fd.get('password'));
+      if(!ok) $('#unlockErr').innerHTML = `<div class="login-err">${icon('alert')} Contraseña incorrecta.</div>`;
+    });
+    $('#lockLogout').addEventListener('click', logout);
+    return;
+  }
+
+  $$('[data-nav]').forEach(b=>b.addEventListener('click',(e)=>{
+    e.preventDefault();
+    S.view=b.getAttribute('data-nav');
+    S.editingMovement=null;
+    render();
+  }));
+  $$('[data-action="logout"]').forEach(b=>b.addEventListener('click', logout));
+  $$('[data-action="lock"]').forEach(b=>b.addEventListener('click', ()=>{ S.locked=true; render(); }));
+
+  $$('[data-quick]').forEach(b=>b.addEventListener('click',()=>{
+    S.mvType=b.getAttribute('data-quick');
+    S.mvSubtype='servicio';
+    S.view='nuevo';
+    render();
+  }));
+
+  const toggleAmounts=$('#toggleAmounts');
+  if(toggleAmounts) toggleAmounts.addEventListener('click', async ()=>{
+    await setMeta('showAmounts', !(S.meta.showAmounts!==false));
+    render();
+  });
+
+  bindMovementFormEvents();
+
+  $$('[data-hist-range]').forEach(b=>b.addEventListener('click',()=>{ S.histFilter.range=b.getAttribute('data-hist-range'); render(); }));
+  const histType=$('#histType'); if(histType) histType.addEventListener('change',()=>{ S.histFilter.type=histType.value; render(); });
+  const histSearch=$('#histSearch'); if(histSearch) histSearch.addEventListener('input',()=>{ S.histFilter.q=histSearch.value; render(); });
+  $$('[data-mv]').forEach(row=>row.addEventListener('click',()=>{ openMovimientoDetalle(Number(row.getAttribute('data-mv'))); }));
+
+  $$('[data-rep-range]').forEach(b=>b.addEventListener('click',()=>{ S.repRange=b.getAttribute('data-rep-range'); render(); }));
+  const rf=$('#repFrom'), rt=$('#repTo');
+  if(rf) rf.addEventListener('change',()=>{ S.repFrom=rf.value; render(); });
+  if(rt) rt.addEventListener('change',()=>{ S.repTo=rt.value; render(); });
+  const expCsv=$('#exportCsv'); if(expCsv) expCsv.addEventListener('click', exportCsv);
+  const expXls=$('#exportExcel'); if(expXls) expXls.addEventListener('click', exportExcel);
+  const expPdf=$('#exportPdf'); if(expPdf) expPdf.addEventListener('click', exportPdf);
+
+  $$('[data-cattab]').forEach(b=>b.addEventListener('click',()=>{ S.catTab=b.getAttribute('data-cattab'); render(); }));
+  $$('[data-add]').forEach(b=>b.addEventListener('click',()=>{
+    const kind=b.getAttribute('data-add');
+    if(kind==='servicio') openServicioSheet(null);
+    if(kind==='producto') openProductoSheet(null);
+    if(kind==='empleado') openEmpleadoSheet(null);
+    if(kind==='categoria') openCategoriaSheet(null);
+    if(kind==='usuario') openUsuarioSheet(null);
+  }));
+  $$('[data-edit-servicio]').forEach(b=>b.addEventListener('click',()=>openServicioSheet(Number(b.getAttribute('data-edit-servicio')))));
+  $$('[data-edit-producto]').forEach(b=>b.addEventListener('click',()=>openProductoSheet(Number(b.getAttribute('data-edit-producto')))));
+  $$('[data-edit-empleado]').forEach(b=>b.addEventListener('click',()=>openEmpleadoSheet(Number(b.getAttribute('data-edit-empleado')))));
+  $$('[data-edit-categoria]').forEach(b=>b.addEventListener('click',()=>openCategoriaSheet(Number(b.getAttribute('data-edit-categoria')))));
+  $$('[data-edit-usuario]').forEach(b=>b.addEventListener('click',()=>openUsuarioSheet(Number(b.getAttribute('data-edit-usuario')))));
+
+  $$('[data-open-apertura]').forEach(b=>b.addEventListener('click',()=>openAperturaSheet(null)));
+  $$('[data-edit-apertura]').forEach(b=>b.addEventListener('click',()=>openAperturaSheet(Number(b.getAttribute('data-edit-apertura')))));
+  $$('[data-open-cierre]').forEach(b=>b.addEventListener('click',()=>openCierreSheet(null)));
+  $$('[data-edit-cierre]').forEach(b=>b.addEventListener('click',()=>openCierreSheet(Number(b.getAttribute('data-edit-cierre')))));
+  $$('[data-caja-detail]').forEach(b=>b.addEventListener('click',()=>openCajaDetalle(b.getAttribute('data-caja-detail'))));
+  bindDeleteButtons($('#app'));
+  bindPasswordToggles($('#app'));
+
+  const doExport=$('#doExport'); if(doExport) doExport.addEventListener('click', exportBackup);
+  const doEmailShare=$('#doEmailShare'); if(doEmailShare) doEmailShare.addEventListener('click', shareBackupByEmail);
+  const doImport=$('#doImport'); if(doImport) doImport.addEventListener('click', importBackup);
+  const encToggle=$('#encryptToggle');
+  if(encToggle) encToggle.addEventListener('change',()=>{ $('#encryptPwWrap').style.display = encToggle.checked?'block':'none'; });
+  const importFile=$('#importFile');
+  if(importFile) importFile.addEventListener('change',()=>{ $('#decryptPwWrap').style.display='block'; });
+
+  const brandForm=$('#brandForm');
+  if(brandForm) brandForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(brandForm);
+    await setMeta('salonName', fd.get('salonName').trim() || DEFAULT_SALON_NAME);
+    await setMeta('backupEmail', (fd.get('backupEmail')||'').trim());
+    toast('Datos del negocio actualizados','success');
+    render();
+  });
+  const logoInput=$('#logoFileInput');
+  if(logoInput) logoInput.addEventListener('change', async ()=>{
+    const file = logoInput.files && logoInput.files[0];
+    if(!file) return;
+    if(!file.type.startsWith('image/')){ toast('Selecciona un archivo de imagen','error'); return; }
+    if(file.size > 900*1024){ toast('La imagen es muy pesada. Usa un archivo menor a 900 KB.','error'); return; }
+    const dataUrl = await new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); });
+    await setMeta('logoDataUrl', dataUrl);
+    toast('Logo actualizado','success');
+    render();
+  });
+  const removeLogoBtn=$('#removeLogoBtn');
+  if(removeLogoBtn) removeLogoBtn.addEventListener('click', async ()=>{
+    await setMeta('logoDataUrl', '');
+    toast('Logo eliminado','success');
+    render();
+  });
+  const showAmountsToggle=$('#showAmountsToggle');
+  if(showAmountsToggle) showAmountsToggle.addEventListener('change', async ()=>{
+    await setMeta('showAmounts', showAmountsToggle.checked);
+    toast('Preferencia guardada','success');
+  });
+  const lockMinutesSelect=$('#lockMinutesSelect');
+  if(lockMinutesSelect) lockMinutesSelect.addEventListener('change', async ()=>{
+    await setMeta('lockMinutes', Number(lockMinutesSelect.value));
+    toast('Tiempo de bloqueo actualizado','success');
+  });
+
+  const selfUsernameInput=$('#selfUsernameInput');
+  if(selfUsernameInput) maskUsername(selfUsernameInput);
+  const usernameSelfForm=$('#usernameSelfForm');
+  if(usernameSelfForm) usernameSelfForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(usernameSelfForm);
+    const name=(fd.get('name')||'').trim();
+    const username=(fd.get('username')||'').trim().toLowerCase();
+    if(!name || !username){ toast('Completa nombre y usuario','error'); return; }
+    const dup = S.users.find(u=> u.username.toLowerCase()===username && u.id!==S.user.id);
+    if(dup){ toast('Ese nombre de usuario ya está en uso','error'); return; }
+    const u = S.users.find(x=>x.id===S.user.id);
+    u.name=name; u.username=username;
+    await idbPut(S.db,'users',u);
+    await loadAll();
+    S.user.name=name; S.user.username=username;
+    toast('Datos de cuenta actualizados','success');
+    render();
+  });
+
+  const pwForm=$('#pwForm');
+  if(pwForm) pwForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(pwForm);
+    const current=fd.get('current'), next=fd.get('next'), confirmv=fd.get('confirm');
+    const u = S.users.find(x=>x.id===S.user.id);
+    const curHash=await hashPw(current);
+    if(curHash!==u.passwordHash){ toast('La contraseña actual no es correcta','error'); return; }
+    if(next!==confirmv){ toast('Las contraseñas nuevas no coinciden','error'); return; }
+    u.passwordHash = await hashPw(next);
+    await idbPut(S.db,'users',u);
+    await loadAll();
+    toast('Contraseña actualizada','success');
+    pwForm.reset();
+  });
+}
+
+function bindMovementFormEvents(){
+  const seg=$('#typeSeg');
+  if(seg) $$('[data-type]',seg).forEach(b=>b.addEventListener('click',()=>{ S.mvType=b.getAttribute('data-type'); render(); }));
+  const chips=$('#subtypeChips');
+  if(chips) $$('[data-sub]',chips).forEach(b=>b.addEventListener('click',()=>{ S.mvSubtype=b.getAttribute('data-sub'); render(); }));
+  const catSel=$('#categorySelect');
+  if(catSel){
+    const syncCategorySelect=()=>{
+      const wrap=$('#newCatWrap');
+      const addOpt = catSel.querySelector('option[value="__nueva__"]');
+      if(catSel.value==='__nueva__'){
+        if(wrap) wrap.style.display='block';
+      } else {
+        if(wrap) wrap.style.display='none';
+        // Ya hay una categoría existente elegida (manualmente o precargada al editar):
+        // quitamos la opción de "agregar nueva" para no dejarla disponible junto a una selección ya hecha.
+        if(catSel.value!=='' && addOpt){ addOpt.remove(); }
+      }
+    };
+    catSel.addEventListener('change', syncCategorySelect);
+    syncCategorySelect(); // cubre el caso de editar un egreso que ya trae una categoría preseleccionada
+  }
+
+  const svcSel=$('#serviceSelect');
+  const prodSel=$('#productSelect');
+  const empSel=$('#employeeSelect');
+  const commInput = document.querySelector('input[name="commissionPercent"]');
+  const amountInput=$('#amountInput');
+  const conceptFinal=$('#conceptFinal');
+  const commDisplay=$('#commAmountDisplay');
+  const qtyInput = document.querySelector('input[name="qty"]');
+
+  function recalcCommission(){
+    if(!commInput || !amountInput) return;
+    const amt=Number(amountInput.value)||0;
+    const pct=Number(commInput.value)||0;
+    if(commDisplay) commDisplay.value = (amt*pct/100).toFixed(2);
+  }
+  function applyServicePrice(){
+    if(!svcSel || !svcSel.value) return;
+    const opt=svcSel.selectedOptions[0];
+    const price=Number(opt.getAttribute('data-price'))||0;
+    if(amountInput) amountInput.value=price;
+    if(conceptFinal) conceptFinal.value=opt.textContent.split(' — ')[0];
+    recalcCommission();
+  }
+  function applyProductPrice(){
+    if(!prodSel || !prodSel.value) return;
+    const opt=prodSel.selectedOptions[0];
+    const price=Number(opt.getAttribute('data-price'))||0;
+    const qty=Number(qtyInput && qtyInput.value)||1;
+    if(amountInput) amountInput.value = (price*qty).toFixed(2);
+    if(conceptFinal) conceptFinal.value=opt.textContent.split(' — ')[0];
+    recalcCommission();
+  }
+  function applyEmployeeCommission(){
+    if(!empSel || !empSel.value || !commInput) return;
+    const opt=empSel.selectedOptions[0];
+    commInput.value = opt.getAttribute('data-comm');
+    recalcCommission();
+  }
+
+  if(svcSel) svcSel.addEventListener('change', applyServicePrice);
+  if(prodSel) prodSel.addEventListener('change', applyProductPrice);
+  if(qtyInput) qtyInput.addEventListener('input', applyProductPrice);
+  if(empSel) empSel.addEventListener('change', applyEmployeeCommission);
+  if(commInput) commInput.addEventListener('input', recalcCommission);
+  if(amountInput) amountInput.addEventListener('input', recalcCommission);
+
+  const cancelBtn=$('#cancelEdit');
+  if(cancelBtn) cancelBtn.addEventListener('click',()=>{ S.editingMovement=null; render(); });
+
+  const form=$('#mvForm');
+  if(form) form.addEventListener('submit', async (e)=>{ e.preventDefault(); await saveMovement(new FormData(form)); });
+}
+
+/* =====================================================================
+   GUARDAR MOVIMIENTO
+===================================================================== */
+async function saveMovement(fd){
+  const type=S.mvType;
+  const editing=S.editingMovement;
+  let payload = {
+    type, date: fd.get('date') || todayISO(), paymentMethod: fd.get('paymentMethod') || 'Efectivo',
+    createdBy: S.user.username, createdAt: editing? editing.createdAt : new Date().toISOString(),
+  };
+
+  if(type==='ingreso'){
+    const subtype=S.mvSubtype;
+    payload.itemType = subtype==='otro' ? null : subtype;
+
+    if(subtype==='otro'){
+      payload.concept = fd.get('conceptOtro') || 'Ingreso';
+      payload.amount = Number(fd.get('amount'))||0;
+      payload.commissionPercent=0; payload.commissionAmount=0;
+    } else {
+      const itemId = Number(fd.get('itemId'));
+      if(!itemId){ toast('Selecciona un '+subtype,'error'); return; }
+      const list = subtype==='servicio'? S.services : S.products;
+      const item = list.find(x=>x.id===itemId);
+      if(!item){ toast('El elemento seleccionado no existe','error'); return; }
+      payload.itemId=itemId; payload.itemType=subtype;
+      payload.amount = Number(fd.get('amount'))||0;
+      payload.concept = fd.get('conceptFinal') || item.name;
+      const empId = Number(fd.get('employeeId'))||null;
+      payload.employeeId = empId||null;
+      payload.employeeName = empId? (S.employees.find(e=>e.id===empId)||{}).name : null;
+      payload.commissionPercent = Number(fd.get('commissionPercent'))||0;
+      payload.commissionAmount = payload.amount * payload.commissionPercent/100;
+      if(subtype==='producto'){
+        const qty = Number(fd.get('qty'))||1;
+        payload.qty=qty;
+        const prevQty = editing && editing.itemType==='producto' ? (editing.qty||1) : 0;
+        const prevItemId = editing ? editing.itemId : null;
+        if(editing && prevItemId===itemId){
+          item.stock = Math.max(0, item.stock - (qty - prevQty));
+        } else {
+          if(editing && prevItemId){
+            const prevItem=S.products.find(p=>p.id===prevItemId);
+            if(prevItem){ prevItem.stock += prevQty; await idbPut(S.db,'products',prevItem); }
+          }
+          item.stock = Math.max(0, item.stock - qty);
+        }
+        await idbPut(S.db,'products',item);
+      } else if(editing && editing.itemType==='producto' && editing.itemId){
+        const prevItem=S.products.find(p=>p.id===editing.itemId);
+        if(prevItem){ prevItem.stock += (editing.qty||1); await idbPut(S.db,'products',prevItem); }
+      }
+    }
+  } else {
+    let category = fd.get('category');
+    const newCatInput = $('#newCatInput');
+    if((category==='__nueva__' || !S.categories.length) && newCatInput && newCatInput.value.trim()){
+      const name=newCatInput.value.trim();
+      let existing = S.categories.find(c=>c.name.toLowerCase()===name.toLowerCase());
+      if(!existing){ const id = await idbAdd(S.db,'expenseCategories',{name}); existing={id,name}; }
+      category=existing.name;
+      S.categories = await idbGetAll(S.db,'expenseCategories');
+    }
+    if(!category || category==='__nueva__'){ toast('Selecciona o crea una categoría de gasto','error'); return; }
+    payload.category=category;
+    payload.concept = fd.get('conceptFinal') || category;
+    payload.amount = Number(fd.get('amount'))||0;
+  }
+
+  if(!payload.amount || payload.amount<=0){ toast('Ingresa un monto válido','error'); return; }
+
+  if(editing){
+    payload.id=editing.id;
+    await idbPut(S.db,'movements',payload);
+    toast('Movimiento actualizado','success');
+    S.editingMovement=null;
+  } else {
+    await idbAdd(S.db,'movements',payload);
+    toast('Movimiento guardado','success');
+  }
+  await loadAll();
+  closeSheet();
+  render();
+}
+
+/* =====================================================================
+   BINDINGS DE SHEETS + CASCADA EN TIEMPO REAL
+===================================================================== */
+async function cascadeRename(kind, id, oldName, newName){
+  if(oldName===newName) return;
+  if(kind==='empleado'){
+    const affected = S.movements.filter(m=>m.employeeId===id);
+    for(const m of affected){ m.employeeName=newName; await idbPut(S.db,'movements',m); }
+  } else if(kind==='categoria'){
+    const affected = S.movements.filter(m=>m.category===oldName);
+    for(const m of affected){ m.category=newName; await idbPut(S.db,'movements',m); }
+  }
+}
+
+function bindPasswordToggles(root){
+  $$('.pw-toggle', root).forEach(btn=>btn.addEventListener('click',()=>{
+    const input = btn.previousElementSibling;
+    if(!input) return;
+    if(input.type==='password'){ input.type='text'; btn.innerHTML=icon('eyeoff'); btn.setAttribute('aria-label','Ocultar contraseña'); }
+    else { input.type='password'; btn.innerHTML=icon('eye'); btn.setAttribute('aria-label','Mostrar contraseña'); }
+  }));
+}
+
+function bindDeleteButtons(root){
+  $$('[data-del]', root).forEach(b=>b.addEventListener('click', async ()=>{
+    const kind=b.getAttribute('data-del');
+    const id=Number(b.getAttribute('data-delid'));
+
+    if(kind==='cierre'){
+      if(!confirm('¿Eliminar este cierre de caja? Esta acción no se puede deshacer.')) return;
+      await idbDel(S.db,'cashClosings',id);
+      await loadAll(); closeSheet(); render(); toast('Cierre eliminado','success');
+      return;
+    }
+    if(kind==='apertura'){
+      if(!confirm('¿Eliminar esta apertura de caja? Esta acción no se puede deshacer.')) return;
+      await idbDel(S.db,'cashOpenings',id);
+      await loadAll(); closeSheet(); render(); toast('Apertura eliminada','success');
+      return;
+    }
+    if(kind==='usuario'){
+      const u = S.users.find(x=>x.id===id);
+      if(!u){ toast('Ese usuario ya no existe','error'); return; }
+      if(u.id===S.user.id){ toast('No puedes eliminar tu propia cuenta mientras tienes la sesión iniciada.','error'); return; }
+      if(u.role==='admin' && u.active!==false){
+        const otherAdmins = S.users.filter(x=>x.role==='admin' && x.id!==u.id && x.active!==false);
+        if(otherAdmins.length===0){ toast('Debe existir al menos un administrador activo. No puedes eliminar el último.','error'); return; }
+      }
+      if(!confirm(`¿Eliminar al usuario "${u.username}"? Esta acción no se puede deshacer.`)) return;
+      await idbDel(S.db,'users',id);
+      await loadAll(); closeSheet(); render(); toast('Usuario eliminado','success');
+      return;
+    }
+
+    // servicio / producto / empleado / categoria
+    const storeMap = {servicio:'services', producto:'products', empleado:'employees', categoria:'expenseCategories'};
+    const storeName = storeMap[kind];
+    if(!storeName) return;
+
+    let usedIn=false;
+    let usageMsg='No se puede eliminar: tiene movimientos registrados. Márcalo como Inactivo en su lugar para conservar el historial.';
+    if(kind==='servicio' || kind==='producto'){
+      usedIn = S.movements.some(m=> m.itemType===kind && m.itemId===id);
+    } else if(kind==='empleado'){
+      usedIn = S.movements.some(m=> m.employeeId===id);
+    } else if(kind==='categoria'){
+      const cat = S.categories.find(c=>c.id===id);
+      usedIn = !!cat && S.movements.some(m=> m.category===cat.name);
+      usageMsg = 'No se puede eliminar: hay egresos registrados con esta categoría. Cambia esos egresos a otra categoría antes de eliminarla.';
+    }
+    if(usedIn){ toast(usageMsg,'error'); return; }
+
+    if(!confirm('¿Eliminar este elemento? Esta acción no se puede deshacer.')) return;
+    await idbDel(S.db, storeName, id);
+    await loadAll();
+    closeSheet(); render();
+    toast('Elemento eliminado','success');
+  }));
+}
+
+function bindSheetEvents(){
+  $$('[data-close-sheet]').forEach(b=>b.addEventListener('click', closeSheet));
+  const phoneInput=$('#empPhone'); if(phoneInput) maskPhone(phoneInput);
+  const usernameInput=$('#usernameInput'); if(usernameInput) maskUsername(usernameInput);
+
+  const catForm=$('#catForm');
+  if(catForm) catForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const kind=catForm.getAttribute('data-kind');
+    const id=catForm.getAttribute('data-id');
+    const fd=new FormData(catForm);
+    const storeName = kind==='servicio'?'services': kind==='producto'?'products': kind==='empleado'?'employees':'expenseCategories';
+    let obj = id? (await idbGet(S.db, storeName, Number(id))) : {};
+    const oldName = obj.name;
+    if(kind==='servicio'){
+      obj.name=fd.get('name').trim(); obj.price=Number(fd.get('price')); obj.commission=Number(fd.get('commission')); obj.active=fd.get('active')==='1';
+    } else if(kind==='producto'){
+      obj.name=fd.get('name').trim(); obj.price=Number(fd.get('price')); obj.commission=Number(fd.get('commission')); obj.stock=Number(fd.get('stock')); obj.active=fd.get('active')==='1';
+    } else if(kind==='empleado'){
+      obj.name=fd.get('name').trim(); obj.phone=fd.get('phone')||''; obj.defaultCommission=Number(fd.get('defaultCommission')); obj.active=fd.get('active')==='1';
+    } else if(kind==='categoria'){
+      obj.name=fd.get('name').trim();
+    }
+    let newId;
+    if(id){ await idbPut(S.db, storeName, obj); newId=Number(id); } else { newId = await idbAdd(S.db, storeName, obj); }
+    if(id && oldName && oldName!==obj.name){ await cascadeRename(kind, newId, oldName, obj.name); }
+    await loadAll();
+    closeSheet();
+    render();
+    toast('Guardado con éxito · los cambios ya están reflejados en todo el sistema','success');
+  });
+
+  bindDeleteButtons($('#sheetOverlay'));
+  bindPasswordToggles($('#sheetOverlay'));
+
+  const userForm=$('#userForm');
+  if(userForm) userForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const id=userForm.getAttribute('data-id');
+    const fd=new FormData(userForm);
+    let obj = id? S.users.find(x=>x.id===Number(id)) : {};
+    const username=(fd.get('username')||'').trim().toLowerCase();
+    if(!username){ toast('El usuario es obligatorio','error'); return; }
+    const dup = S.users.find(u=> u.username.toLowerCase()===username && String(u.id)!==id);
+    if(dup){ toast('Ese nombre de usuario ya existe','error'); return; }
+    const willStayActiveAdmin = fd.get('role')==='admin' && fd.get('active')==='1';
+    if(id && obj.role==='admin' && obj.active!==false && !willStayActiveAdmin){
+      const otherAdmins = S.users.filter(u=>u.role==='admin' && u.id!==obj.id && u.active!==false);
+      if(otherAdmins.length===0){ toast('Debe existir al menos un administrador activo','error'); return; }
+    }
+    obj.name=fd.get('name').trim(); obj.username=username; obj.role=fd.get('role'); obj.active=fd.get('active')==='1';
+    const pw=fd.get('password');
+    if(pw) obj.passwordHash = await hashPw(pw);
+    else if(!obj.passwordHash){ toast('Define una contraseña','error'); return; }
+    if(id) await idbPut(S.db,'users',obj); else await idbAdd(S.db,'users',obj);
+    await loadAll();
+    closeSheet(); render();
+    toast('Usuario guardado','success');
+  });
+
+  const editMvBtn=$('#editMvBtn');
+  if(editMvBtn) editMvBtn.addEventListener('click',()=>{
+    const id=Number(editMvBtn.getAttribute('data-editmv'));
+    const m=S.movements.find(x=>x.id===id);
+    S.editingMovement=m; S.mvType=m.type; S.mvSubtype=m.itemType||'otro'; S.view='nuevo';
+    closeSheet(); render();
+  });
+  const delMvBtn=$('#delMvBtn');
+  if(delMvBtn) delMvBtn.addEventListener('click', async ()=>{
+    if(!confirm('¿Eliminar este movimiento?')) return;
+    const id=Number(delMvBtn.getAttribute('data-delmv'));
+    const m=S.movements.find(x=>x.id===id);
+    if(m && m.itemType==='producto' && m.itemId){
+      const p=S.products.find(x=>x.id===m.itemId);
+      if(p){ p.stock += (m.qty||1); await idbPut(S.db,'products',p); }
+    }
+    await idbDel(S.db,'movements',id);
+    await loadAll();
+    closeSheet(); render();
+    toast('Movimiento eliminado','success');
+  });
+
+  const aperturaForm=$('#aperturaForm');
+  if(aperturaForm) aperturaForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const id=aperturaForm.getAttribute('data-id');
+    const date=aperturaForm.getAttribute('data-date');
+    const fd=new FormData(aperturaForm);
+    const obj = { date, openingCash: Number(fd.get('openingCash'))||0, notes: fd.get('notes')||'', openedBy: S.user.username, openedAt: id? (S.openings.find(o=>o.id===Number(id))||{}).openedAt || new Date().toISOString() : new Date().toISOString() };
+    if(id){ obj.id=Number(id); await idbPut(S.db,'cashOpenings',obj); } else { await idbAdd(S.db,'cashOpenings',obj); }
+    await loadAll();
+    closeSheet(); render();
+    toast('Apertura de caja guardada','success');
+  });
+
+  const cierreForm=$('#cierreForm');
+  if(cierreForm) cierreForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const id=cierreForm.getAttribute('data-id');
+    const date=cierreForm.getAttribute('data-date');
+    const fd=new FormData(cierreForm);
+    const expected = expectedCashFor(date);
+    const counted = Number(fd.get('countedCash'))||0;
+    const obj = { date, expectedCash:expected, countedCash:counted, difference: counted-expected, notes: fd.get('notes')||'', closedBy: S.user.username, closedAt: id? (S.closings.find(c=>c.id===Number(id))||{}).closedAt || new Date().toISOString() : new Date().toISOString() };
+    if(id){ obj.id=Number(id); await idbPut(S.db,'cashClosings',obj); } else { await idbAdd(S.db,'cashClosings',obj); }
+    await loadAll();
+    closeSheet(); render();
+    toast('Cierre de caja guardado','success');
+  });
+}
+
+/* =====================================================================
+   EXPORTAR CSV / EXCEL / PDF
+===================================================================== */
+function currentReportRange(){
+  const range = S.repRange;
+  return range==='personalizado' ? {from:S.repFrom||todayISO(), to:S.repTo||todayISO()} : rangeFor(range);
+}
+function exportCsv(){
+  const {from,to} = currentReportRange();
+  const list = movementsInRange(from,to);
+  const rows=[['Fecha','Tipo','Concepto','Categoría/Item','Empleado','Comisión %','Comisión $','Método de pago','Monto']];
+  list.forEach(m=>{ rows.push([m.date, m.type, m.concept, m.category||m.itemType||'', m.employeeName||'', m.commissionPercent||0, (m.commissionAmount||0).toFixed(2), m.paymentMethod||'', m.amount.toFixed(2)]); });
+  const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8;'}), `flujo-caja_${from}_a_${to}.csv`);
+  toast('CSV descargado','success');
+}
+function exportExcel(){
+  const {from,to} = currentReportRange();
+  const list = movementsInRange(from,to);
+  const t = totals(list);
+  const rowsHtml = list.map(m=>`<tr>
+    <td>${esc(m.date)}</td><td>${m.type==='ingreso'?'Ingreso':'Egreso'}</td><td>${esc(m.concept)}</td>
+    <td>${esc(m.employeeName||m.category||'')}</td><td>${esc(m.paymentMethod||'')}</td>
+    <td align="right">${m.amount.toFixed(2)}</td></tr>`).join('');
+  const html = `<html><head><meta charset="UTF-8"></head><body>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr><td colspan="2"><b>${esc(S.meta.salonName||DEFAULT_SALON_NAME)}</b></td></tr>
+      <tr><td colspan="2">Reporte de flujo de efectivo: ${esc(from)} a ${esc(to)}</td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td>Ingresos</td><td align="right">${t.ingresos.toFixed(2)}</td></tr>
+      <tr><td>Egresos</td><td align="right">${t.egresos.toFixed(2)}</td></tr>
+      <tr><td>Comisiones</td><td align="right">${t.comisiones.toFixed(2)}</td></tr>
+      <tr><td><b>Balance neto</b></td><td align="right"><b>${t.balance.toFixed(2)}</b></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Detalle</th><th>Pago</th><th>Monto</th></tr>
+      ${rowsHtml}
+    </table></body></html>`;
+  downloadBlob(new Blob([html],{type:'application/vnd.ms-excel;charset=utf-8;'}), `flujo-caja_${from}_a_${to}.xls`);
+  toast('Excel descargado (puede pedir confirmar el formato al abrirlo)','success');
+}
+function buildReportDocument(from, to, list, t, topSvc, topProd){
+  const rowsHtml = list.map(m=>`<tr>
+    <td>${esc(m.date)}</td><td>${m.type==='ingreso'?'Ingreso':'Egreso'}</td><td>${esc(m.concept)}</td>
+    <td>${esc(m.employeeName||m.category||'')}</td><td class="r">${fmt(m.amount)}</td>
+  </tr>`).join('');
+  const logoHtml = S.meta.logoDataUrl? `<img class="logo" src="${S.meta.logoDataUrl}" alt="Logo">` : '';
+  const rankHtml = (title, items) => items.length? `
+    <h4>${title}</h4>
+    <table class="detail"><tbody>
+      ${items.map(s=>`<tr><td>${esc(s.name)}</td><td>${s.count}</td><td class="r">${fmt(s.amount)}</td></tr>`).join('')}
+    </tbody></table>` : '';
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de caja — ${esc(S.meta.salonName||DEFAULT_SALON_NAME)}</title>
+<style>
+  *{box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1A1720;padding:28px;max-width:820px;margin:0 auto;}
+  .brandrow{display:flex;align-items:center;gap:12px;margin-bottom:2px;}
+  .logo{width:44px;height:44px;object-fit:cover;border-radius:8px;}
+  h2{font-family:Georgia,'Times New Roman',serif;margin:0;font-weight:400;font-size:22px;}
+  .sub{color:#555;margin:4px 0 20px;font-size:13px;}
+  table{width:100%;border-collapse:collapse;}
+  .totals{margin-bottom:20px;}
+  .totals td{padding:6px 4px;font-size:14px;}
+  .totals tr:last-child td{font-weight:bold;border-top:1.5px solid #000;padding-top:9px;}
+  .r{text-align:right;}
+  h4{margin:20px 0 8px;font-size:14px;}
+  .detail th{border-bottom:1.5px solid #000;text-align:left;font-size:11.5px;padding:5px 4px;}
+  .detail td{font-size:11.5px;border-bottom:1px solid #e5e5e5;padding:5px 4px;}
+  @media print{ body{padding:12px;} }
+</style>
+</head>
+<body>
+  <div class="brandrow">${logoHtml}<h2>${esc(S.meta.salonName||DEFAULT_SALON_NAME)}</h2></div>
+  <div class="sub">Reporte de flujo de efectivo · ${esc(from)} a ${esc(to)} · generado ${new Date().toLocaleString('es-SV')}</div>
+  <table class="totals"><tbody>
+    <tr><td>Ingresos</td><td class="r">${fmt(t.ingresos)}</td></tr>
+    <tr><td>Egresos</td><td class="r">${fmt(t.egresos)}</td></tr>
+    <tr><td>Comisiones</td><td class="r">${fmt(t.comisiones)}</td></tr>
+    <tr><td>Balance neto</td><td class="r">${fmt(t.balance)}</td></tr>
+  </tbody></table>
+  ${rankHtml('Servicios más vendidos', topSvc)}
+  ${rankHtml('Productos más vendidos', topProd)}
+  <h4>Detalle de movimientos (${list.length})</h4>
+  <table class="detail">
+    <thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Detalle</th><th class="r">Monto</th></tr></thead>
+    <tbody>${rowsHtml || '<tr><td colspan="5" style="padding:10px 4px;color:#777;">Sin movimientos en este rango.</td></tr>'}</tbody>
+  </table>
+  <script>
+    window.onload = function(){ setTimeout(function(){ window.print(); }, 200); };
+  <\/script>
+</body>
+</html>`;
+}
+
+function exportPdf(){
+  const {from,to} = currentReportRange();
+  const list = movementsInRange(from,to);
+  const t = totals(list);
+  const topSvc = topItems(list,'servicio',5);
+  const topProd = topItems(list,'producto',5);
+  const doc = buildReportDocument(from, to, list, t, topSvc, topProd);
+
+  const win = window.open('', '_blank');
+  if(!win){
+    toast('Tu navegador bloqueó la ventana del reporte. Permite ventanas emergentes para este sitio e inténtalo de nuevo.','error');
+    return;
+  }
+  win.document.open();
+  win.document.write(doc);
+  win.document.close();
+}
+function downloadBlob(blob, filename){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.click();
+}
+
+/* =====================================================================
+   RESPALDO: CIFRADO, DESCARGA, ENVÍO POR CORREO, RESTAURACIÓN
+===================================================================== */
+function buildBackupPayload(){
+  return {
+    version:2, exportedAt: new Date().toISOString(),
+    meta:S.meta, users:S.users, employees:S.employees, services:S.services, products:S.products,
+    expenseCategories:S.categories, movements:S.movements, cashClosings:S.closings, cashOpenings:S.openings,
+  };
+}
+async function deriveAesKey(passphrase, salt){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(passphrase), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:150000, hash:'SHA-256'}, km, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+}
+async function encryptText(text, passphrase){
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveAesKey(passphrase, salt);
+  const enc = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, new TextEncoder().encode(text));
+  return JSON.stringify({ encrypted:true, salt:btoa(String.fromCharCode(...salt)), iv:btoa(String.fromCharCode(...iv)), data:btoa(String.fromCharCode(...new Uint8Array(enc))) });
+}
+async function decryptText(payloadStr, passphrase){
+  const obj = JSON.parse(payloadStr);
+  const salt = Uint8Array.from(atob(obj.salt), c=>c.charCodeAt(0));
+  const iv = Uint8Array.from(atob(obj.iv), c=>c.charCodeAt(0));
+  const data = Uint8Array.from(atob(obj.data), c=>c.charCodeAt(0));
+  const key = await deriveAesKey(passphrase, salt);
+  const dec = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, data);
+  return new TextDecoder().decode(dec);
+}
+async function getBackupFile(){
+  const payload = JSON.stringify(buildBackupPayload(), null, 2);
+  const encToggle=$('#encryptToggle');
+  const passInput=$('#backupPassphrase');
+  let content=payload, suffix='';
+  if(encToggle && encToggle.checked){
+    const pass=(passInput && passInput.value)||'';
+    if(!pass){ toast('Ingresa una contraseña para proteger el respaldo','error'); return null; }
+    content = await encryptText(payload, pass);
+    suffix='-protegido';
+  }
+  const filename = `respaldo-salon_${todayISO()}${suffix}.json`;
+  return new File([content], filename, {type:'application/json'});
+}
+async function exportBackup(){
+  const file = await getBackupFile();
+  if(!file) return;
+  downloadBlob(file, file.name);
+  toast('Respaldo descargado','success');
+}
+async function shareBackupByEmail(){
+  const file = await getBackupFile();
+  if(!file) return;
+  const subject = `Respaldo de caja — ${esc(S.meta.salonName||DEFAULT_SALON_NAME)} (${todayISO()})`;
+  const body = `Adjunto el respaldo de datos generado el ${todayISO()}.`;
+
+  const supportsFileShare = !!(navigator.canShare && navigator.share && navigator.canShare({files:[file]}));
+
+  if(supportsFileShare){
+    try{
+      await navigator.share({files:[file], title:subject, text:body});
+      toast('Elige tu app de correo para enviarlo','success');
+    }catch(err){
+      // El usuario cerró/canceló la ventana de compartir: respetamos su decisión y no hacemos nada más.
+      if(err && err.name==='AbortError') return;
+      // Falló por otra razón real (no cancelación): ofrecemos el plan B explicado.
+      openEmailFallbackSheet(file, subject, body);
+    }
+    return;
+  }
+  // Este navegador no soporta compartir archivos: explicamos el plan B antes de ejecutarlo.
+  openEmailFallbackSheet(file, subject, body);
+}
+
+function openEmailFallbackSheet(file, subject, body){
+  openSheet(`
+    ${sheetHeader('Enviar respaldo por correo')}
+    <div class="banner info">${icon('mail')} Tu navegador no puede adjuntar el archivo automáticamente a un correo. Vamos a hacerlo en dos pasos:</div>
+    <div class="card" style="box-shadow:none;border:1px solid var(--line);">
+      <div class="small" style="margin-bottom:8px;"><b>1.</b> Se descargará el respaldo a tu dispositivo (<code>${esc(file.name)}</code>).</div>
+      <div class="small"><b>2.</b> Se abrirá tu app de correo con el asunto ya escrito — solo debes adjuntar manualmente el archivo que se acaba de descargar.</div>
+    </div>
+    <div class="btn-row" style="margin-top:16px;">
+      <button type="button" class="btn btn-secondary" data-close-sheet>Cancelar</button>
+      <button type="button" class="btn btn-primary" id="confirmEmailFallback">${icon('mail')} Continuar</button>
+    </div>
+  `);
+  const btn = $('#confirmEmailFallback');
+  if(btn) btn.addEventListener('click', ()=>{
+    downloadBlob(file, file.name);
+    closeSheet();
+    toast('Archivo descargado. Abriendo tu correo…','success');
+    setTimeout(()=>{
+      const email = S.meta.backupEmail || '';
+      const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body+'\n\nAdjunta manualmente el archivo que se acaba de descargar: '+file.name)}`;
+      window.location.href = mailto;
+    }, 700);
+  });
+}
+async function importBackup(){
+  const input=$('#importFile');
+  if(!input.files || !input.files[0]){ toast('Selecciona un archivo primero','error'); return; }
+  if(!confirm('Esto reemplazará todos los datos actuales. ¿Continuar?')) return;
+  try{
+    let text = await input.files[0].text();
+    let data;
+    try{ data = JSON.parse(text); }
+    catch(e){ data=null; }
+    if(data && data.encrypted){
+      const pass = ($('#restorePassphrase')||{}).value || '';
+      text = await decryptText(text, pass);
+      data = JSON.parse(text);
+    } else if(!data){
+      const pass = ($('#restorePassphrase')||{}).value || '';
+      text = await decryptText(text, pass);
+      data = JSON.parse(text);
+    }
+    for(const s of STORES){
+      if(s==='meta') continue;
+      const existing = await idbGetAll(S.db,s);
+      for(const item of existing) await idbDel(S.db,s,item.id);
+    }
+    const keyMap={users:'users',employees:'employees',services:'services',products:'products',expenseCategories:'expenseCategories',movements:'movements',cashClosings:'cashClosings',cashOpenings:'cashOpenings'};
+    for(const key of Object.keys(keyMap)){
+      const items = data[key]||[];
+      for(const item of items){ const {id, ...rest} = item; await idbAdd(S.db,keyMap[key],{...rest}); }
+    }
+    if(data.meta){ for(const k of Object.keys(data.meta)){ await idbPut(S.db,'meta',{key:k, value:data.meta[k]}); } }
+    await loadAll();
+    toast('Respaldo restaurado con éxito','success');
+    S.view='dashboard'; render();
+  }catch(err){
+    toast('El archivo no es válido o la contraseña es incorrecta','error');
+  }
+}
+
+/* =====================================================================
+   INIT
+===================================================================== */
+(async function init(){
+  try{
+    if(!window.indexedDB) throw new Error('NO_IDB');
+    S.db = await openDB();
+    await seedIfNeeded();
+    await loadAll();
+    await restoreSession();
+    setupInactivityLock();
+    render();
+  }catch(err){
+    console.error('INIT ERROR:', err);
+    document.getElementById('app').innerHTML = `
+      <div style="padding:40px 24px;text-align:center;font-family:-apple-system,sans-serif;color:#1A1720;max-width:420px;margin:0 auto;">
+        <div style="font-size:34px;margin-bottom:10px;">⚠️</div>
+        <div style="font-family:Georgia,serif;font-size:19px;margin-bottom:10px;">No se pudo abrir el almacenamiento local</div>
+        <div style="font-size:14px;color:#635C6B;line-height:1.5;margin-bottom:18px;">
+          Esto suele pasar cuando el archivo se abre desde un visor "en línea" (por ejemplo, dentro de WhatsApp, Gmail o un gestor de archivos) en lugar del navegador.
+        </div>
+        <div style="text-align:left;background:#F1EEF0;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.6;">
+          <b>Cómo solucionarlo:</b><br>
+          1. Ubica el archivo en tu teléfono (Descargas o Archivos).<br>
+          2. Mantén presionado el archivo → "Abrir con" → elige <b>Chrome</b> (Android) o <b>Safari</b> (iPhone).<br>
+          3. Evita abrirlo directamente desde WhatsApp o el correo: usa "Guardar archivo" primero.
+        </div>
+      </div>`;
+  }
+})();
+
+})();
+</script>
+<script>
+  // Registro del Service Worker: habilita la instalación como PWA y el uso offline real.
+  // Si el archivo se abre localmente (file://) o el navegador no soporta Service Workers,
+  // esto simplemente no hace nada — el resto de la app sigue funcionando igual.
+  if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(()=>{ /* no crítico */ });
+    });
+  }
+</script>
+</body>
+</html>
