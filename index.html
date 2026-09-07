@@ -1180,10 +1180,20 @@ function renderHistorial(){
     <div class="kpi"><div class="k-lbl">Balance neto</div><div class="k-val">${fmtMasked(t.balance)}</div></div>
   </div>
 
-  ${dates.length? dates.map(d=>`
+  ${dates.length? dates.map(d=>{
+    const dayTotals = totals(groups[d]);
+    return `
     <div class="divider-label">${fmtDateLong(d)} ${isClosed(d)?'🔒':''}</div>
-    <div class="card">${groups[d].map(renderMvRow).join('')}</div>
-  `).join('') : `<div class="card">${renderEmpty('Sin resultados','Ajusta los filtros o el rango de fechas.')}</div>`}
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding-bottom:11px; margin-bottom:9px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:12.5px; font-weight:700;">
+        <span style="color:var(--success-dark)">+${fmtMasked(dayTotals.ingresos)}</span>
+        <span style="color:var(--danger-dark)">-${fmtMasked(dayTotals.egresos)}</span>
+        <span style="color:var(--ink);">Neto ${fmtMasked(dayTotals.balance)}</span>
+      </div>
+      ${groups[d].map(renderMvRow).join('')}
+    </div>
+  `;
+  }).join('') : `<div class="card">${renderEmpty('Sin resultados','Ajusta los filtros o el rango de fechas.')}</div>`}
   `;
 }
 
